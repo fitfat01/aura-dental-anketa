@@ -26,6 +26,9 @@
   .card { transition: transform .25s ease, box-shadow .25s ease; }
   .card:hover { transform: translateY(-6px); box-shadow: 0 24px 50px -18px rgba(3,16,91,.28); }
   html { scroll-behavior: smooth; }
+  .lang-btn { opacity: .5; transition: opacity .15s ease, transform .15s ease; }
+  .lang-btn.active { opacity: 1; transform: scale(1.05); }
+  .lang-btn:hover { opacity: .85; }
 </style>
 </head>
 <body class="font-body text-ink">
@@ -38,12 +41,23 @@
       <span class="font-display font-extrabold text-navy text-lg">Aura Dental</span>
     </a>
     <div class="hidden md:flex items-center gap-7 text-[15px] text-muted">
-      <a href="#about" class="hover:text-navy transition">Про клініку</a>
-      <a href="#offer" class="hover:text-navy transition">Що пропонуємо</a>
-      <a href="#how" class="hover:text-navy transition">Як приєднатися</a>
-      <a href="#contact" class="hover:text-navy transition">Контакти</a>
+      <a href="#about" class="hover:text-navy transition" data-uk="Про клініку" data-ru="О клинике">Про клініку</a>
+      <a href="#offer" class="hover:text-navy transition" data-uk="Що пропонуємо" data-ru="Что предлагаем">Що пропонуємо</a>
+      <a href="#how" class="hover:text-navy transition" data-uk="Як приєднатися" data-ru="Как присоединиться">Як приєднатися</a>
+      <a href="#contact" class="hover:text-navy transition" data-uk="Контакти" data-ru="Контакты">Контакти</a>
     </div>
-    <a href="anketa/" class="bg-navy text-white px-5 py-2.5 rounded-full font-semibold text-[15px] hover:bg-navy-ink transition shadow-md shadow-navy/20">Заповнити анкету</a>
+    <div class="flex items-center gap-3">
+      <!-- Language switcher -->
+      <div class="flex items-center gap-1.5" role="group" aria-label="Мова / Язык">
+        <button class="lang-btn active" data-lang="uk" title="Українська" aria-label="Українська">
+          <svg viewBox="0 0 9 6" class="w-7 h-5 rounded-[3px] ring-1 ring-black/10"><rect width="9" height="3" fill="#0057b7"/><rect y="3" width="9" height="3" fill="#ffd700"/></svg>
+        </button>
+        <button class="lang-btn" data-lang="ru" title="Русский" aria-label="Русский">
+          <svg viewBox="0 0 9 6" class="w-7 h-5 rounded-[3px] ring-1 ring-black/10"><rect width="9" height="6" fill="#fff"/><rect y="2" width="9" height="2" fill="#d22730"/></svg>
+        </button>
+      </div>
+      <a href="anketa/" class="bg-navy text-white px-5 py-2.5 rounded-full font-semibold text-[15px] hover:bg-navy-ink transition shadow-md shadow-navy/20" data-uk="Заповнити анкету" data-ru="Заполнить анкету">Заповнити анкету</a>
+    </div>
   </div>
 </nav>
 
@@ -54,33 +68,37 @@
   <div class="lg:col-span-7">
     <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-teal-soft/25 text-navy border border-teal-soft/40 mb-6 text-sm font-semibold">
       <span class="material-symbols-outlined text-[18px]">location_on</span>
-      Нова клініка у Познані · Rataje / Winogrady
+      <span data-uk="Нова клініка у Познані · Rataje або Winogrady" data-ru="Новая клиника в Познани · Rataje или Winogrady">Нова клініка у Познані · Rataje або Winogrady</span>
     </div>
-    <h1 class="font-display font-extrabold text-navy text-4xl sm:text-5xl leading-[1.08] mb-6">
+    <h1 class="font-display font-extrabold text-navy text-4xl sm:text-5xl leading-[1.08] mb-6"
+      data-uk="Шукаємо україно- та російськомовних лікарів-стоматологів"
+      data-ru="Ищем украино- и русскоязычных врачей-стоматологов">
       Шукаємо україно- та російськомовних лікарів-стоматологів
     </h1>
-    <p class="text-lg text-muted max-w-xl mb-8">
+    <p class="text-lg text-muted max-w-xl mb-8"
+      data-uk="Aura Dental — сучасна стоматологічна клініка у Познані. Ми будуємо команду з лікарів, які говорять мовою наших пацієнтів, і допомагаємо на кожному етапі — від легалізації диплому до першого робочого дня."
+      data-ru="Aura Dental — современная стоматологическая клиника в Познани. Мы формируем команду из врачей, которые говорят на языке наших пациентов, и помогаем на каждом этапе — от легализации диплома до первого рабочего дня.">
       Aura Dental — сучасна стоматологічна клініка у Познані. Ми будуємо команду з
       лікарів, які говорять мовою наших пацієнтів, і допомагаємо на кожному етапі —
       від легалізації диплому до першого робочого дня.
     </p>
     <div class="flex flex-col sm:flex-row gap-4">
       <a href="anketa/" class="inline-flex items-center justify-center gap-2 bg-navy text-white px-8 py-4 rounded-full font-display font-bold text-lg hover:bg-navy-ink transition shadow-xl shadow-navy/25">
-        Заповнити анкету <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+        <span data-uk="Заповнити анкету" data-ru="Заполнить анкету">Заповнити анкету</span> <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
       </a>
-      <a href="#about" class="inline-flex items-center justify-center gap-2 border-2 border-navy/15 text-navy px-8 py-4 rounded-full font-semibold hover:bg-white/60 transition">
+      <a href="#about" class="inline-flex items-center justify-center gap-2 border-2 border-navy/15 text-navy px-8 py-4 rounded-full font-semibold hover:bg-white/60 transition" data-uk="Дізнатись більше" data-ru="Узнать больше">
         Дізнатись більше
       </a>
     </div>
-    <p class="text-sm text-muted mt-5 flex items-center gap-2"><span class="material-symbols-outlined text-[18px] text-teal">schedule</span> Анкета займає ~2 хвилини</p>
+    <p class="text-sm text-muted mt-5 flex items-center gap-2"><span class="material-symbols-outlined text-[18px] text-teal">schedule</span> <span data-uk="Анкета займає ~2 хвилини" data-ru="Анкета занимает ~2 минуты">Анкета займає ~2 хвилини</span></p>
   </div>
   <div class="lg:col-span-5">
     <div class="glass rounded-[2rem] p-3 rotate-2 hover:rotate-0 transition-transform duration-500 shadow-2xl">
       <img alt="Усміхнений лікар-стоматолог Aura Dental" class="rounded-[1.6rem] w-full aspect-[4/5] object-cover"
         src="https://lh3.googleusercontent.com/aida/AP1WRLsKj9qkabAPaDQ6ECrHyeXdC1lwgg6Xsx3VJxB7as3HrBfXhedM1wKwX7wqLPD2VqjPBshNZXKXrdp6lZYy1oLlSsxBUdQy4_hU1UpYsoI62_yiDNiyGeODIp--NQpont0NG7VQOUrMiiNY_z6DQpYKqu0Q9RBzwPuSLQWhWLcmhFgAkyKN7HL2VZkqYj-xcjpfF3du0Gi5sUfoJ7KmMykAEGFbTuRbYdH7NsHqTdaCYGeagqKweLxVjA"/>
       <div class="glass rounded-2xl p-5 -mt-16 mx-4 relative shadow-xl">
-        <p class="text-navy text-sm font-semibold mb-1">Старт кар'єри у Польщі</p>
-        <p class="font-display font-bold text-lg leading-snug">Повна підтримка на кожному етапі</p>
+        <p class="text-navy text-sm font-semibold mb-1" data-uk="Старт кар'єри у Польщі" data-ru="Старт карьеры в Польше">Старт кар'єри у Польщі</p>
+        <p class="font-display font-bold text-lg leading-snug" data-uk="Повна підтримка на кожному етапі" data-ru="Полная поддержка на каждом этапе">Повна підтримка на кожному етапі</p>
       </div>
     </div>
   </div>
@@ -89,24 +107,26 @@
 <!-- ABOUT -->
 <section id="about" class="max-w-container mx-auto px-5 sm:px-8 py-16">
   <div class="glass rounded-[2rem] p-8 sm:p-14">
-    <h2 class="font-display font-extrabold text-navy text-3xl mb-4">Про клініку</h2>
+    <h2 class="font-display font-extrabold text-navy text-3xl mb-4" data-uk="Про клініку" data-ru="О клинике">Про клініку</h2>
     <div class="grid md:grid-cols-2 gap-8 text-muted text-lg leading-relaxed">
-      <p>
-        Aura Dental відкривається у зручних районах Познані — <b class="text-ink">Rataje</b> та
+      <p data-uk="Aura Dental відкривається в одному з зручних районів Познані — <b class='text-ink'>Rataje</b> або <b class='text-ink'>Winogrady</b>. Це нова клініка з сучасним обладнанням, комфортними кабінетами та командою, орієнтованою на якісну й спокійну стоматологію."
+         data-ru="Aura Dental открывается в одном из удобных районов Познани — <b class='text-ink'>Rataje</b> или <b class='text-ink'>Winogrady</b>. Это новая клиника с современным оборудованием, комфортными кабинетами и командой, ориентированной на качественную и спокойную стоматологию.">
+        Aura Dental відкривається в одному з зручних районів Познані — <b class="text-ink">Rataje</b> або
         <b class="text-ink">Winogrady</b>. Це нова клініка з сучасним обладнанням,
         комфортними кабінетами та командою, орієнтованою на якісну й спокійну стоматологію.
       </p>
-      <p>
+      <p data-uk="Ми свідомо шукаємо <b class='text-ink'>україно- та російськомовних лікарів</b> — щоб пацієнти відчували себе впевнено рідною мовою, а лікарі мали середовище, де їх розуміють і підтримують у процесі легалізації та адаптації в Польщі."
+         data-ru="Мы сознательно ищем <b class='text-ink'>украино- и русскоязычных врачей</b> — чтобы пациенты чувствовали себя уверенно на родном языке, а врачи имели среду, где их понимают и поддерживают в процессе легализации и адаптации в Польше.">
         Ми свідомо шукаємо <b class="text-ink">україно- та російськомовних лікарів</b> — щоб пацієнти
         відчували себе впевнено рідною мовою, а лікарі мали середовище, де їх розуміють і
         підтримують у процесі легалізації та адаптації в Польщі.
       </p>
     </div>
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-10">
-      <div class="text-center"><p class="font-display font-extrabold text-navy text-3xl">2</p><p class="text-sm text-muted mt-1">райони Познані</p></div>
-      <div class="text-center"><p class="font-display font-extrabold text-navy text-3xl">UA/RU</p><p class="text-sm text-muted mt-1">мови команди</p></div>
-      <div class="text-center"><p class="font-display font-extrabold text-navy text-3xl">PWZ</p><p class="text-sm text-muted mt-1">супровід документів</p></div>
-      <div class="text-center"><p class="font-display font-extrabold text-navy text-3xl">100%</p><p class="text-sm text-muted mt-1">офіційно</p></div>
+      <div class="text-center"><p class="font-display font-extrabold text-navy text-3xl">3</p><p class="text-sm text-muted mt-1" data-uk="мови команди · UA · BY · PL" data-ru="языка команды · UA · BY · PL">мови команди · UA · BY · PL</p></div>
+      <div class="text-center"><p class="font-display font-extrabold text-navy text-3xl">PWZ</p><p class="text-sm text-muted mt-1" data-uk="супровід документів" data-ru="сопровождение документов">супровід документів</p></div>
+      <div class="text-center"><p class="font-display font-extrabold text-navy text-3xl">100%</p><p class="text-sm text-muted mt-1" data-uk="офіційно" data-ru="официально">офіційно</p></div>
+      <div class="text-center"><p class="font-display font-extrabold text-navy text-3xl">Познань</p><p class="text-sm text-muted mt-1">Rataje / Winogrady</p></div>
     </div>
   </div>
 </section>
@@ -114,40 +134,39 @@
 <!-- OFFER -->
 <section id="offer" class="max-w-container mx-auto px-5 sm:px-8 py-16">
   <div class="text-center mb-12">
-    <h2 class="font-display font-extrabold text-navy text-3xl sm:text-4xl mb-3">Що ми пропонуємо</h2>
-    <p class="text-muted text-lg max-w-2xl mx-auto">Умови, які дають впевненість із першого дня.</p>
+    <h2 class="font-display font-extrabold text-navy text-3xl sm:text-4xl mb-3" data-uk="Що ми пропонуємо" data-ru="Что мы предлагаем">Що ми пропонуємо</h2>
+    <p class="text-muted text-lg max-w-2xl mx-auto" data-uk="Умови, які дають впевненість із першого дня." data-ru="Условия, которые дают уверенность с первого дня.">Умови, які дають впевненість із першого дня.</p>
   </div>
   <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-    <!-- cards -->
     <div class="card glass rounded-2xl p-8">
       <div class="w-14 h-14 rounded-xl bg-navy flex items-center justify-center mb-5"><span class="material-symbols-outlined text-white">verified_user</span></div>
-      <h3 class="font-display font-bold text-xl mb-2">Офіційне працевлаштування</h3>
-      <p class="text-muted">Прозорий контракт, соціальні гарантії та стабільні виплати з першого дня.</p>
+      <h3 class="font-display font-bold text-xl mb-2" data-uk="Офіційне працевлаштування" data-ru="Официальное трудоустройство">Офіційне працевлаштування</h3>
+      <p class="text-muted" data-uk="Прозорий контракт, соціальні гарантії та стабільні виплати з першого дня." data-ru="Прозрачный контракт, социальные гарантии и стабильные выплаты с первого дня.">Прозорий контракт, соціальні гарантії та стабільні виплати з першого дня.</p>
     </div>
     <div class="card glass rounded-2xl p-8">
       <div class="w-14 h-14 rounded-xl bg-teal-soft flex items-center justify-center mb-5"><span class="material-symbols-outlined text-navy">support_agent</span></div>
-      <h3 class="font-display font-bold text-xl mb-2">Підтримка з PWZ та нострифікацією</h3>
-      <p class="text-muted">Юридичний і адміністративний супровід легалізації диплому та права на практику.</p>
+      <h3 class="font-display font-bold text-xl mb-2" data-uk="Підтримка з PWZ та нострифікацією" data-ru="Поддержка с PWZ и нострификацией">Підтримка з PWZ та нострифікацією</h3>
+      <p class="text-muted" data-uk="Юридичний і адміністративний супровід легалізації диплому та права на практику." data-ru="Юридическое и административное сопровождение легализации диплома и права на практику.">Юридичний і адміністративний супровід легалізації диплому та права на практику.</p>
     </div>
     <div class="card glass rounded-2xl p-8">
       <div class="w-14 h-14 rounded-xl bg-navy flex items-center justify-center mb-5"><span class="material-symbols-outlined text-white">payments</span></div>
-      <h3 class="font-display font-bold text-xl mb-2">Конкурентна оплата</h3>
-      <p class="text-muted">Гідна винагорода та прозора система мотивації, що росте разом із вами.</p>
+      <h3 class="font-display font-bold text-xl mb-2" data-uk="Конкурентна оплата" data-ru="Конкурентная оплата">Конкурентна оплата</h3>
+      <p class="text-muted" data-uk="Гідна винагорода та прозора система мотивації, що росте разом із вами." data-ru="Достойное вознаграждение и прозрачная система мотивации, которая растёт вместе с вами.">Гідна винагорода та прозора система мотивації, що росте разом із вами.</p>
     </div>
     <div class="card glass rounded-2xl p-8">
       <div class="w-14 h-14 rounded-xl bg-teal-soft flex items-center justify-center mb-5"><span class="material-symbols-outlined text-navy">dentistry</span></div>
-      <h3 class="font-display font-bold text-xl mb-2">Сучасне обладнання</h3>
-      <p class="text-muted">Нові кабінети, якісні матеріали та інструменти для комфортної роботи.</p>
+      <h3 class="font-display font-bold text-xl mb-2" data-uk="Сучасне обладнання" data-ru="Современное оборудование">Сучасне обладнання</h3>
+      <p class="text-muted" data-uk="Нові кабінети, якісні матеріали та інструменти для комфортної роботи." data-ru="Новые кабинеты, качественные материалы и инструменты для комфортной работы.">Нові кабінети, якісні матеріали та інструменти для комфортної роботи.</p>
     </div>
     <div class="card glass rounded-2xl p-8">
       <div class="w-14 h-14 rounded-xl bg-navy flex items-center justify-center mb-5"><span class="material-symbols-outlined text-white">map</span></div>
-      <h3 class="font-display font-bold text-xl mb-2">Зручна локація</h3>
-      <p class="text-muted">Rataje та Winogrady — комфортні райони з гарною транспортною доступністю.</p>
+      <h3 class="font-display font-bold text-xl mb-2" data-uk="Зручна локація" data-ru="Удобная локация">Зручна локація</h3>
+      <p class="text-muted" data-uk="Rataje або Winogrady — комфортні райони з гарною транспортною доступністю." data-ru="Rataje или Winogrady — комфортные районы с хорошей транспортной доступностью.">Rataje або Winogrady — комфортні райони з гарною транспортною доступністю.</p>
     </div>
     <div class="card glass rounded-2xl p-8">
       <div class="w-14 h-14 rounded-xl bg-teal-soft flex items-center justify-center mb-5"><span class="material-symbols-outlined text-navy">diversity_3</span></div>
-      <h3 class="font-display font-bold text-xl mb-2">Своя команда</h3>
-      <p class="text-muted">Колеги, які говорять вашою мовою, менторство й підтримка в адаптації.</p>
+      <h3 class="font-display font-bold text-xl mb-2" data-uk="Своя команда" data-ru="Своя команда">Своя команда</h3>
+      <p class="text-muted" data-uk="Колеги, які говорять вашою мовою (UA · BY · PL), менторство й підтримка в адаптації." data-ru="Коллеги, которые говорят на вашем языке (UA · BY · PL), менторство и поддержка в адаптации.">Колеги, які говорять вашою мовою (UA · BY · PL), менторство й підтримка в адаптації.</p>
     </div>
   </div>
 </section>
@@ -155,27 +174,27 @@
 <!-- HOW -->
 <section id="how" class="max-w-container mx-auto px-5 sm:px-8 py-16">
   <div class="glass rounded-[2rem] p-8 sm:p-14">
-    <h2 class="font-display font-extrabold text-navy text-3xl sm:text-4xl mb-10 text-center">Як приєднатися</h2>
+    <h2 class="font-display font-extrabold text-navy text-3xl sm:text-4xl mb-10 text-center" data-uk="Як приєднатися" data-ru="Как присоединиться">Як приєднатися</h2>
     <div class="grid sm:grid-cols-4 gap-6">
       <div class="text-center">
         <div class="w-12 h-12 mx-auto rounded-full bg-navy text-white font-display font-bold flex items-center justify-center text-lg mb-4">1</div>
-        <h3 class="font-semibold mb-1">Заповніть анкету</h3>
-        <p class="text-muted text-sm">2 хвилини — розкажіть про себе та ваш статус.</p>
+        <h3 class="font-semibold mb-1" data-uk="Заповніть анкету" data-ru="Заполните анкету">Заповніть анкету</h3>
+        <p class="text-muted text-sm" data-uk="2 хвилини — розкажіть про себе та ваш статус." data-ru="2 минуты — расскажите о себе и вашем статусе.">2 хвилини — розкажіть про себе та ваш статус.</p>
       </div>
       <div class="text-center">
         <div class="w-12 h-12 mx-auto rounded-full bg-navy text-white font-display font-bold flex items-center justify-center text-lg mb-4">2</div>
-        <h3 class="font-semibold mb-1">Ми зв'яжемося</h3>
-        <p class="text-muted text-sm">Зателефонуємо, щоб обговорити деталі.</p>
+        <h3 class="font-semibold mb-1" data-uk="Ми зв'яжемося" data-ru="Мы свяжемся">Ми зв'яжемося</h3>
+        <p class="text-muted text-sm" data-uk="Зателефонуємо, щоб обговорити деталі." data-ru="Позвоним, чтобы обсудить детали.">Зателефонуємо, щоб обговорити деталі.</p>
       </div>
       <div class="text-center">
         <div class="w-12 h-12 mx-auto rounded-full bg-navy text-white font-display font-bold flex items-center justify-center text-lg mb-4">3</div>
-        <h3 class="font-semibold mb-1">Співбесіда</h3>
-        <p class="text-muted text-sm">Знайомство з клінікою та умовами роботи.</p>
+        <h3 class="font-semibold mb-1" data-uk="Співбесіда" data-ru="Собеседование">Співбесіда</h3>
+        <p class="text-muted text-sm" data-uk="Знайомство з клінікою та умовами роботи." data-ru="Знакомство с клиникой и условиями работы.">Знайомство з клінікою та умовами роботи.</p>
       </div>
       <div class="text-center">
         <div class="w-12 h-12 mx-auto rounded-full bg-navy text-white font-display font-bold flex items-center justify-center text-lg mb-4">4</div>
-        <h3 class="font-semibold mb-1">Оффер і підтримка</h3>
-        <p class="text-muted text-sm">Допомагаємо з документами та стартом.</p>
+        <h3 class="font-semibold mb-1" data-uk="Оффер і підтримка" data-ru="Оффер и поддержка">Оффер і підтримка</h3>
+        <p class="text-muted text-sm" data-uk="Допомагаємо з документами та стартом." data-ru="Помогаем с документами и стартом.">Допомагаємо з документами та стартом.</p>
       </div>
     </div>
   </div>
@@ -185,10 +204,10 @@
 <section class="max-w-container mx-auto px-5 sm:px-8 py-16">
   <div class="rounded-[2rem] bg-navy text-white p-10 sm:p-16 text-center relative overflow-hidden">
     <div class="absolute -top-16 -right-16 w-64 h-64 rounded-full bg-teal/20 blur-3xl"></div>
-    <h2 class="font-display font-extrabold text-3xl sm:text-4xl mb-4 relative">Готові приєднатися до Aura Dental?</h2>
-    <p class="text-white/80 text-lg max-w-xl mx-auto mb-8 relative">Заповніть коротку анкету — і ми зв'яжемося з вами щодо роботи в клініці.</p>
+    <h2 class="font-display font-extrabold text-3xl sm:text-4xl mb-4 relative" data-uk="Готові приєднатися до Aura Dental?" data-ru="Готовы присоединиться к Aura Dental?">Готові приєднатися до Aura Dental?</h2>
+    <p class="text-white/80 text-lg max-w-xl mx-auto mb-8 relative" data-uk="Заповніть коротку анкету — і ми зв'яжемося з вами щодо роботи в клініці." data-ru="Заполните короткую анкету — и мы свяжемся с вами по поводу работы в клинике.">Заповніть коротку анкету — і ми зв'яжемося з вами щодо роботи в клініці.</p>
     <a href="anketa/" class="relative inline-flex items-center justify-center gap-2 bg-white text-navy px-9 py-4 rounded-full font-display font-bold text-lg hover:bg-teal-soft transition shadow-xl">
-      Заповнити анкету <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+      <span data-uk="Заповнити анкету" data-ru="Заполнить анкету">Заповнити анкету</span> <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
     </a>
   </div>
 </section>
@@ -202,19 +221,37 @@
         <span class="font-display font-extrabold text-white bg-navy w-9 h-9 rounded-lg flex items-center justify-center">A</span>
         <span class="font-display font-extrabold text-navy text-lg">Aura Dental</span>
       </div>
-      <p class="text-muted text-sm">Стоматологічна клініка<br/>Rataje · Winogrady, Познань</p>
+      <p class="text-muted text-sm" data-uk="Стоматологічна клініка<br/>Rataje або Winogrady, Познань" data-ru="Стоматологическая клиника<br/>Rataje или Winogrady, Познань">Стоматологічна клініка<br/>Rataje або Winogrady, Познань</p>
     </div>
     <div>
-      <p class="font-semibold text-navy mb-3">Контакти</p>
+      <p class="font-semibold text-navy mb-3" data-uk="Контакти" data-ru="Контакты">Контакти</p>
       <p class="text-muted text-sm flex items-center gap-2 mb-2"><span class="material-symbols-outlined text-[18px] text-teal">call</span> +48 123 456 789</p>
       <p class="text-muted text-sm flex items-center gap-2"><span class="material-symbols-outlined text-[18px] text-teal">mail</span> hr@aura-dental.pl</p>
     </div>
     <div>
-      <p class="font-semibold text-navy mb-3">Кар'єра</p>
-      <a href="anketa/" class="text-muted text-sm hover:text-navy transition flex items-center gap-2"><span class="material-symbols-outlined text-[18px] text-teal">assignment</span> Заповнити анкету лікаря</a>
+      <p class="font-semibold text-navy mb-3" data-uk="Кар'єра" data-ru="Карьера">Кар'єра</p>
+      <a href="anketa/" class="text-muted text-sm hover:text-navy transition flex items-center gap-2"><span class="material-symbols-outlined text-[18px] text-teal">assignment</span> <span data-uk="Заповнити анкету лікаря" data-ru="Заполнить анкету врача">Заповнити анкету лікаря</span></a>
     </div>
   </div>
   <p class="text-center text-xs text-muted pb-8">© 2026 Aura Dental · Познань · дослідження ринку</p>
 </footer>
 
+<script>
+  (function(){
+    const btns = document.querySelectorAll('.lang-btn');
+    function setLang(lang){
+      document.documentElement.lang = (lang === 'ru' ? 'ru' : 'uk');
+      document.querySelectorAll('[data-uk]').forEach(function(el){
+        const val = lang === 'ru' ? el.getAttribute('data-ru') : el.getAttribute('data-uk');
+        if (val != null) el.innerHTML = val;
+      });
+      btns.forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+      try { localStorage.setItem('auraLang', lang); } catch(e){}
+    }
+    btns.forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+    let saved = 'uk';
+    try { saved = localStorage.getItem('auraLang') || 'uk'; } catch(e){}
+    setLang(saved);
+  })();
+</script>
 </body></html>
