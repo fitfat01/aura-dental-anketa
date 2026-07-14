@@ -34,7 +34,6 @@
   @keyframes slideIn { from { opacity: 0; transform: translateX(28px); } to { opacity: 1; transform: none; } }
   @keyframes slideBack { from { opacity: 0; transform: translateX(-28px); } to { opacity: 1; transform: none; } }
 
-  /* Option buttons (quiz style) */
   .opt input { position: absolute; opacity: 0; width: 0; height: 0; }
   .opt-body {
     display: flex; align-items: center; justify-content: space-between; gap: .75rem;
@@ -65,6 +64,9 @@
   @keyframes draw { to { stroke-dashoffset: 0; } }
   .pop { animation: pop .5s cubic-bezier(.34,1.56,.64,1) both; }
   @keyframes pop { from { opacity: 0; transform: scale(.8); } to { opacity: 1; transform: scale(1); } }
+  .lang-btn { opacity:.5; transition: opacity .15s ease, transform .15s ease; }
+  .lang-btn.active { opacity:1; transform: scale(1.05); }
+  .lang-btn:hover { opacity:.85; }
 
   @media (prefers-reduced-motion: reduce) {
     .step.active, .pop { animation: none !important; }
@@ -76,20 +78,29 @@
 <body class="font-body text-ink min-h-dvh flex items-center justify-center p-4 sm:p-6">
 
 <main class="w-full max-w-xl">
-  <!-- Brand -->
-  <div class="flex items-center gap-3 mb-5 px-1">
-    <span class="font-display font-extrabold text-white bg-navy w-11 h-11 rounded-xl flex items-center justify-center text-lg">A</span>
-    <div>
-      <p class="font-display font-extrabold text-navy leading-tight text-lg">Aura Dental</p>
-      <p class="text-[13px] text-muted">Rataje · Winogrady, Познань</p>
+  <!-- Brand + lang -->
+  <div class="flex items-center justify-between gap-3 mb-5 px-1">
+    <div class="flex items-center gap-3">
+      <span class="font-display font-extrabold text-white bg-navy w-11 h-11 rounded-xl flex items-center justify-center text-lg">A</span>
+      <div>
+        <p class="font-display font-extrabold text-navy leading-tight text-lg">Aura Dental</p>
+        <p class="text-[13px] text-muted" data-uk="Rataje · Winogrady, Познань" data-ru="Rataje · Winogrady, Познань">Rataje · Winogrady, Познань</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-1.5" role="group" aria-label="Мова / Язык">
+      <button type="button" class="lang-btn active" data-lang="uk" title="Українська" aria-label="Українська">
+        <svg viewBox="0 0 9 6" class="w-7 h-5 rounded-[3px] ring-1 ring-black/10"><rect width="9" height="3" fill="#0057b7"/><rect y="3" width="9" height="3" fill="#ffd700"/></svg>
+      </button>
+      <button type="button" class="lang-btn" data-lang="ru" title="Русский" aria-label="Русский">
+        <svg viewBox="0 0 9 6" class="w-7 h-5 rounded-[3px] ring-1 ring-black/10"><rect width="9" height="6" fill="#fff"/><rect y="2" width="9" height="2" fill="#d22730"/></svg>
+      </button>
     </div>
   </div>
 
   <div class="glass rounded-[2rem] shadow-[0_24px_60px_-15px_rgba(3,16,91,0.25)] overflow-hidden">
-    <!-- Progress -->
     <div id="progressWrap" class="px-6 sm:px-10 pt-8">
       <div class="flex items-center justify-between mb-3">
-        <span class="font-display font-bold text-navy">Анкета лікаря-стоматолога</span>
+        <span class="font-display font-bold text-navy" data-uk="Анкета лікаря-стоматолога" data-ru="Анкета врача-стоматолога">Анкета лікаря-стоматолога</span>
         <span id="stepLabel" class="text-[13px] font-semibold text-navy tabular-nums whitespace-nowrap">1 / 10</span>
       </div>
       <div class="h-2.5 w-full rounded-full bg-line/50 overflow-hidden">
@@ -98,131 +109,120 @@
     </div>
 
     <form id="quiz" novalidate class="px-6 sm:px-10 pt-8 pb-6">
-      <!-- 1. Ім'я -->
+      <!-- 1 -->
       <section class="step active" data-step="0">
-        <h2 class="font-display text-2xl font-extrabold text-navy mb-1">Як вас звати?</h2>
-        <p class="text-muted mb-6">Почнімо знайомство — ваше ім'я.</p>
-        <input id="fname" type="text" autocomplete="given-name" class="qinput" placeholder="Ваше ім'я"/>
-        <p class="err text-danger text-sm mt-2 hidden">Будь ласка, вкажіть ім'я</p>
+        <h2 class="font-display text-2xl font-extrabold text-navy mb-1" data-uk="Як вас звати?" data-ru="Как вас зовут?">Як вас звати?</h2>
+        <p class="text-muted mb-6" data-uk="Почнімо знайомство — ваше ім'я." data-ru="Начнём знакомство — ваше имя.">Почнімо знайомство — ваше ім'я.</p>
+        <input id="fname" type="text" autocomplete="given-name" class="qinput" placeholder="Ваше ім'я" data-uk-ph="Ваше ім'я" data-ru-ph="Ваше имя"/>
+        <p class="err text-danger text-sm mt-2 hidden" data-uk="Будь ласка, вкажіть ім'я" data-ru="Пожалуйста, укажите имя">Будь ласка, вкажіть ім'я</p>
       </section>
-
-      <!-- 2. Прізвище -->
+      <!-- 2 -->
       <section class="step" data-step="1">
-        <h2 class="font-display text-2xl font-extrabold text-navy mb-1">Ваше прізвище?</h2>
-        <p class="text-muted mb-6">Щоб ми знали, як до вас звертатись.</p>
-        <input id="lname" type="text" autocomplete="family-name" class="qinput" placeholder="Ваше прізвище"/>
-        <p class="err text-danger text-sm mt-2 hidden">Будь ласка, вкажіть прізвище</p>
+        <h2 class="font-display text-2xl font-extrabold text-navy mb-1" data-uk="Ваше прізвище?" data-ru="Ваша фамилия?">Ваше прізвище?</h2>
+        <p class="text-muted mb-6" data-uk="Щоб ми знали, як до вас звертатись." data-ru="Чтобы мы знали, как к вам обращаться.">Щоб ми знали, як до вас звертатись.</p>
+        <input id="lname" type="text" autocomplete="family-name" class="qinput" placeholder="Ваше прізвище" data-uk-ph="Ваше прізвище" data-ru-ph="Ваша фамилия"/>
+        <p class="err text-danger text-sm mt-2 hidden" data-uk="Будь ласка, вкажіть прізвище" data-ru="Пожалуйста, укажите фамилию">Будь ласка, вкажіть прізвище</p>
       </section>
-
-      <!-- 3. Місто -->
+      <!-- 3 -->
       <section class="step" data-step="2">
-        <h2 class="font-display text-2xl font-extrabold text-navy mb-1">Місто проживання</h2>
-        <p class="text-muted mb-6">Необов'язково — можна пропустити.</p>
-        <input id="city" type="text" class="qinput" placeholder="Наприклад: Познань"/>
+        <h2 class="font-display text-2xl font-extrabold text-navy mb-1" data-uk="Місто проживання" data-ru="Город проживания">Місто проживання</h2>
+        <p class="text-muted mb-6" data-uk="Необов'язково — можна пропустити." data-ru="Необязательно — можно пропустить.">Необов'язково — можна пропустити.</p>
+        <input id="city" type="text" class="qinput" placeholder="Наприклад: Познань" data-uk-ph="Наприклад: Познань" data-ru-ph="Например: Познань"/>
       </section>
-
-      <!-- 4. Телефон -->
+      <!-- 4 -->
       <section class="step" data-step="3">
-        <h2 class="font-display text-2xl font-extrabold text-navy mb-1">Номер телефону</h2>
-        <p class="text-muted mb-6">Ми зв'яжемося з вами щодо роботи.</p>
-        <input id="phone" type="tel" inputmode="tel" autocomplete="tel" class="qinput" placeholder="+48 / +380 …"/>
-        <p class="err text-danger text-sm mt-2 hidden">Вкажіть коректний номер (мін. 9 цифр)</p>
-        <p class="text-[13px] text-muted mt-3 flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px]">lock</span> Дані використовуються лише для зв'язку щодо роботи.</p>
+        <h2 class="font-display text-2xl font-extrabold text-navy mb-1" data-uk="Номер телефону" data-ru="Номер телефона">Номер телефону</h2>
+        <p class="text-muted mb-6" data-uk="Ми зв'яжемося з вами щодо роботи." data-ru="Мы свяжемся с вами по поводу работы.">Ми зв'яжемося з вами щодо роботи.</p>
+        <input id="phone" type="tel" inputmode="tel" autocomplete="tel" class="qinput" placeholder="+48 / +380 …" data-uk-ph="+48 / +380 …" data-ru-ph="+48 / +380 …"/>
+        <p class="err text-danger text-sm mt-2 hidden" data-uk="Вкажіть коректний номер (мін. 9 цифр)" data-ru="Укажите корректный номер (мин. 9 цифр)">Вкажіть коректний номер (мін. 9 цифр)</p>
+        <p class="text-[13px] text-muted mt-3 flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px]">lock</span> <span data-uk="Дані використовуються лише для зв'язку щодо роботи." data-ru="Данные используются только для связи по работе.">Дані використовуються лише для зв'язку щодо роботи.</span></p>
       </section>
-
-      <!-- 5. PWZ -->
+      <!-- 5 PWZ -->
       <section class="step" data-step="4" data-choice="pwz">
-        <h2 class="font-display text-2xl font-extrabold text-navy mb-1">Чи є у вас активний PWZ?</h2>
+        <h2 class="font-display text-2xl font-extrabold text-navy mb-1" data-uk="Чи є у вас активний PWZ?" data-ru="Есть ли у вас активный PWZ?">Чи є у вас активний PWZ?</h2>
         <p class="text-muted mb-6">Prawo Wykonywania Zawodu.</p>
         <div class="space-y-3">
-          <label class="opt block"><input type="radio" name="pwz" value="Так"><span class="opt-body">Так<span class="opt-tick material-symbols-outlined">check_circle</span></span></label>
-          <label class="opt block"><input type="radio" name="pwz" value="Ні"><span class="opt-body">Ні<span class="opt-tick material-symbols-outlined">check_circle</span></span></label>
-          <label class="opt block"><input type="radio" name="pwz" value="У процесі отримання"><span class="opt-body">У процесі отримання<span class="opt-tick material-symbols-outlined">check_circle</span></span></label>
+          <label class="opt block"><input type="radio" name="pwz" value="Так"><span class="opt-body"><span data-uk="Так" data-ru="Да">Так</span><span class="opt-tick material-symbols-outlined">check_circle</span></span></label>
+          <label class="opt block"><input type="radio" name="pwz" value="Ні"><span class="opt-body"><span data-uk="Ні" data-ru="Нет">Ні</span><span class="opt-tick material-symbols-outlined">check_circle</span></span></label>
+          <label class="opt block"><input type="radio" name="pwz" value="У процесі отримання"><span class="opt-body"><span data-uk="У процесі отримання" data-ru="В процессе получения">У процесі отримання</span><span class="opt-tick material-symbols-outlined">check_circle</span></span></label>
         </div>
       </section>
-
-      <!-- 6. Нострифікація -->
+      <!-- 6 Нострифікація -->
       <section class="step" data-step="5" data-choice="nostr">
-        <h2 class="font-display text-2xl font-extrabold text-navy mb-1">Диплом нострифікований?</h2>
-        <p class="text-muted mb-6">Оберіть ваш статус.</p>
+        <h2 class="font-display text-2xl font-extrabold text-navy mb-1" data-uk="Диплом нострифікований?" data-ru="Диплом нострифицирован?">Диплом нострифікований?</h2>
+        <p class="text-muted mb-6" data-uk="Оберіть ваш статус." data-ru="Выберите ваш статус.">Оберіть ваш статус.</p>
         <div class="space-y-3">
-          <label class="opt block"><input type="radio" name="nostr" value="Так"><span class="opt-body">Так, повністю<span class="opt-tick material-symbols-outlined">check_circle</span></span></label>
-          <label class="opt block"><input type="radio" name="nostr" value="Ні"><span class="opt-body">Ні<span class="opt-tick material-symbols-outlined">check_circle</span></span></label>
-          <label class="opt block"><input type="radio" name="nostr" value="У процесі"><span class="opt-body">У процесі<span class="opt-tick material-symbols-outlined">check_circle</span></span></label>
-          <label class="opt block"><input type="radio" name="nostr" value="Закінчив медичний ВНЗ в ЄС"><span class="opt-body">Закінчив медичний ВНЗ в ЄС<span class="opt-tick material-symbols-outlined">check_circle</span></span></label>
+          <label class="opt block"><input type="radio" name="nostr" value="Так"><span class="opt-body"><span data-uk="Так, повністю" data-ru="Да, полностью">Так, повністю</span><span class="opt-tick material-symbols-outlined">check_circle</span></span></label>
+          <label class="opt block"><input type="radio" name="nostr" value="Ні"><span class="opt-body"><span data-uk="Ні" data-ru="Нет">Ні</span><span class="opt-tick material-symbols-outlined">check_circle</span></span></label>
+          <label class="opt block"><input type="radio" name="nostr" value="У процесі"><span class="opt-body"><span data-uk="У процесі" data-ru="В процессе">У процесі</span><span class="opt-tick material-symbols-outlined">check_circle</span></span></label>
+          <label class="opt block"><input type="radio" name="nostr" value="Закінчив медичний ВНЗ в ЄС"><span class="opt-body"><span data-uk="Закінчив медичний ВНЗ в ЄС" data-ru="Окончил медицинский ВУЗ в ЕС">Закінчив медичний ВНЗ в ЄС</span><span class="opt-tick material-symbols-outlined">check_circle</span></span></label>
         </div>
       </section>
-
-      <!-- 7. Спеціалізація (multi) -->
+      <!-- 7 Спеціалізація -->
       <section class="step" data-step="6" data-multi="spec">
-        <h2 class="font-display text-2xl font-extrabold text-navy mb-1">Ваша спеціалізація</h2>
-        <p class="text-muted mb-6">Можна обрати кілька.</p>
+        <h2 class="font-display text-2xl font-extrabold text-navy mb-1" data-uk="Ваша спеціалізація" data-ru="Ваша специализация">Ваша спеціалізація</h2>
+        <p class="text-muted mb-6" data-uk="Можна обрати кілька." data-ru="Можно выбрать несколько.">Можна обрати кілька.</p>
         <div class="flex flex-wrap gap-2.5">
-          <label class="opt"><input type="checkbox" name="spec" value="Терапевт"><span class="opt-body !py-3 !px-5 !text-base w-auto">Терапевт<span class="opt-tick material-symbols-outlined text-[18px]">check</span></span></label>
-          <label class="opt"><input type="checkbox" name="spec" value="Хірург"><span class="opt-body !py-3 !px-5 !text-base w-auto">Хірург<span class="opt-tick material-symbols-outlined text-[18px]">check</span></span></label>
-          <label class="opt"><input type="checkbox" name="spec" value="Ортодонт"><span class="opt-body !py-3 !px-5 !text-base w-auto">Ортодонт<span class="opt-tick material-symbols-outlined text-[18px]">check</span></span></label>
-          <label class="opt"><input type="checkbox" name="spec" value="Ортопед"><span class="opt-body !py-3 !px-5 !text-base w-auto">Ортопед<span class="opt-tick material-symbols-outlined text-[18px]">check</span></span></label>
-          <label class="opt"><input type="checkbox" name="spec" value="Дитячий"><span class="opt-body !py-3 !px-5 !text-base w-auto">Дитячий<span class="opt-tick material-symbols-outlined text-[18px]">check</span></span></label>
-          <label class="opt"><input type="checkbox" name="spec" value="Імплантолог"><span class="opt-body !py-3 !px-5 !text-base w-auto">Імплантолог<span class="opt-tick material-symbols-outlined text-[18px]">check</span></span></label>
-          <label class="opt"><input type="checkbox" name="spec" value="Пародонтолог"><span class="opt-body !py-3 !px-5 !text-base w-auto">Пародонтолог<span class="opt-tick material-symbols-outlined text-[18px]">check</span></span></label>
-          <label class="opt"><input type="checkbox" name="spec" value="Ендодонтист"><span class="opt-body !py-3 !px-5 !text-base w-auto">Ендодонтист<span class="opt-tick material-symbols-outlined text-[18px]">check</span></span></label>
-          <label class="opt"><input type="checkbox" name="spec" value="Гігієніст"><span class="opt-body !py-3 !px-5 !text-base w-auto">Гігієніст<span class="opt-tick material-symbols-outlined text-[18px]">check</span></span></label>
-          <label class="opt"><input type="checkbox" name="spec" value="Рентгенолог"><span class="opt-body !py-3 !px-5 !text-base w-auto">Рентгенолог<span class="opt-tick material-symbols-outlined text-[18px]">check</span></span></label>
-          <label class="opt"><input type="checkbox" name="spec" value="Інше"><span class="opt-body !py-3 !px-5 !text-base w-auto">Інше<span class="opt-tick material-symbols-outlined text-[18px]">check</span></span></label>
+          <label class="opt"><input type="checkbox" name="spec" value="Терапевт"><span class="opt-body !py-3 !px-5 !text-base w-auto"><span data-uk="Терапевт" data-ru="Терапевт">Терапевт</span><span class="opt-tick material-symbols-outlined text-[18px]">check</span></span></label>
+          <label class="opt"><input type="checkbox" name="spec" value="Хірург"><span class="opt-body !py-3 !px-5 !text-base w-auto"><span data-uk="Хірург" data-ru="Хирург">Хірург</span><span class="opt-tick material-symbols-outlined text-[18px]">check</span></span></label>
+          <label class="opt"><input type="checkbox" name="spec" value="Ортодонт"><span class="opt-body !py-3 !px-5 !text-base w-auto"><span data-uk="Ортодонт" data-ru="Ортодонт">Ортодонт</span><span class="opt-tick material-symbols-outlined text-[18px]">check</span></span></label>
+          <label class="opt"><input type="checkbox" name="spec" value="Ортопед"><span class="opt-body !py-3 !px-5 !text-base w-auto"><span data-uk="Ортопед" data-ru="Ортопед">Ортопед</span><span class="opt-tick material-symbols-outlined text-[18px]">check</span></span></label>
+          <label class="opt"><input type="checkbox" name="spec" value="Дитячий"><span class="opt-body !py-3 !px-5 !text-base w-auto"><span data-uk="Дитячий" data-ru="Детский">Дитячий</span><span class="opt-tick material-symbols-outlined text-[18px]">check</span></span></label>
+          <label class="opt"><input type="checkbox" name="spec" value="Імплантолог"><span class="opt-body !py-3 !px-5 !text-base w-auto"><span data-uk="Імплантолог" data-ru="Имплантолог">Імплантолог</span><span class="opt-tick material-symbols-outlined text-[18px]">check</span></span></label>
+          <label class="opt"><input type="checkbox" name="spec" value="Пародонтолог"><span class="opt-body !py-3 !px-5 !text-base w-auto"><span data-uk="Пародонтолог" data-ru="Пародонтолог">Пародонтолог</span><span class="opt-tick material-symbols-outlined text-[18px]">check</span></span></label>
+          <label class="opt"><input type="checkbox" name="spec" value="Ендодонтист"><span class="opt-body !py-3 !px-5 !text-base w-auto"><span data-uk="Ендодонтист" data-ru="Эндодонтист">Ендодонтист</span><span class="opt-tick material-symbols-outlined text-[18px]">check</span></span></label>
+          <label class="opt"><input type="checkbox" name="spec" value="Гігієніст"><span class="opt-body !py-3 !px-5 !text-base w-auto"><span data-uk="Гігієніст" data-ru="Гигиенист">Гігієніст</span><span class="opt-tick material-symbols-outlined text-[18px]">check</span></span></label>
+          <label class="opt"><input type="checkbox" name="spec" value="Рентгенолог"><span class="opt-body !py-3 !px-5 !text-base w-auto"><span data-uk="Рентгенолог" data-ru="Рентгенолог">Рентгенолог</span><span class="opt-tick material-symbols-outlined text-[18px]">check</span></span></label>
+          <label class="opt"><input type="checkbox" name="spec" value="Інше"><span class="opt-body !py-3 !px-5 !text-base w-auto"><span data-uk="Інше" data-ru="Другое">Інше</span><span class="opt-tick material-symbols-outlined text-[18px]">check</span></span></label>
         </div>
-        <p class="err text-danger text-sm mt-3 hidden">Оберіть принаймні один варіант</p>
+        <p class="err text-danger text-sm mt-3 hidden" data-uk="Оберіть принаймні один варіант" data-ru="Выберите хотя бы один вариант">Оберіть принаймні один варіант</p>
       </section>
-
-      <!-- 8. Працюєте зараз (cond) -->
+      <!-- 8 Працюєте -->
       <section class="step" data-step="7" data-cond="working" data-cond-value="Так" data-cond-field="where">
-        <h2 class="font-display text-2xl font-extrabold text-navy mb-1">Чи працюєте зараз за фахом?</h2>
-        <p class="text-muted mb-6">Ваша поточна зайнятість.</p>
+        <h2 class="font-display text-2xl font-extrabold text-navy mb-1" data-uk="Чи працюєте зараз за фахом?" data-ru="Работаете ли сейчас по специальности?">Чи працюєте зараз за фахом?</h2>
+        <p class="text-muted mb-6" data-uk="Ваша поточна зайнятість." data-ru="Ваша текущая занятость.">Ваша поточна зайнятість.</p>
         <div class="space-y-3">
-          <label class="opt block"><input type="radio" name="working" value="Так"><span class="opt-body">Так<span class="opt-tick material-symbols-outlined">check_circle</span></span></label>
-          <label class="opt block"><input type="radio" name="working" value="Ні"><span class="opt-body">Ні<span class="opt-tick material-symbols-outlined">check_circle</span></span></label>
+          <label class="opt block"><input type="radio" name="working" value="Так"><span class="opt-body"><span data-uk="Так" data-ru="Да">Так</span><span class="opt-tick material-symbols-outlined">check_circle</span></span></label>
+          <label class="opt block"><input type="radio" name="working" value="Ні"><span class="opt-body"><span data-uk="Ні" data-ru="Нет">Ні</span><span class="opt-tick material-symbols-outlined">check_circle</span></span></label>
         </div>
         <div class="reveal" id="reveal-where"><div>
-          <input id="where" type="text" class="qinput" placeholder="Де саме? (місто, клініка)"/>
+          <input id="where" type="text" class="qinput" placeholder="Де саме? (місто, клініка)" data-uk-ph="Де саме? (місто, клініка)" data-ru-ph="Где именно? (город, клиника)"/>
         </div></div>
       </section>
-
-      <!-- 9. Формат -->
+      <!-- 9 Формат -->
       <section class="step" data-step="8" data-choice="format">
-        <h2 class="font-display text-2xl font-extrabold text-navy mb-1">Бажаний формат роботи</h2>
-        <p class="text-muted mb-6">Що вам найзручніше?</p>
+        <h2 class="font-display text-2xl font-extrabold text-navy mb-1" data-uk="Бажаний формат роботи" data-ru="Желаемый формат работы">Бажаний формат роботи</h2>
+        <p class="text-muted mb-6" data-uk="Що вам найзручніше?" data-ru="Что вам удобнее?">Що вам найзручніше?</p>
         <div class="space-y-3">
-          <label class="opt block"><input type="radio" name="format" value="Повна ставка"><span class="opt-body">Повна ставка<span class="opt-tick material-symbols-outlined">check_circle</span></span></label>
-          <label class="opt block"><input type="radio" name="format" value="Часткова зайнятість"><span class="opt-body">Часткова зайнятість<span class="opt-tick material-symbols-outlined">check_circle</span></span></label>
-          <label class="opt block"><input type="radio" name="format" value="Підробіток (погодинно)"><span class="opt-body">Підробіток (погодинно)<span class="opt-tick material-symbols-outlined">check_circle</span></span></label>
-          <label class="opt block"><input type="radio" name="format" value="Байдуже"><span class="opt-body">Байдуже<span class="opt-tick material-symbols-outlined">check_circle</span></span></label>
+          <label class="opt block"><input type="radio" name="format" value="Повна ставка"><span class="opt-body"><span data-uk="Повна ставка" data-ru="Полная ставка">Повна ставка</span><span class="opt-tick material-symbols-outlined">check_circle</span></span></label>
+          <label class="opt block"><input type="radio" name="format" value="Часткова зайнятість"><span class="opt-body"><span data-uk="Часткова зайнятість" data-ru="Частичная занятость">Часткова зайнятість</span><span class="opt-tick material-symbols-outlined">check_circle</span></span></label>
+          <label class="opt block"><input type="radio" name="format" value="Підробіток (погодинно)"><span class="opt-body"><span data-uk="Підробіток (погодинно)" data-ru="Подработка (почасово)">Підробіток (погодинно)</span><span class="opt-tick material-symbols-outlined">check_circle</span></span></label>
+          <label class="opt block"><input type="radio" name="format" value="Байдуже"><span class="opt-body"><span data-uk="Байдуже" data-ru="Не важно">Байдуже</span><span class="opt-tick material-symbols-outlined">check_circle</span></span></label>
         </div>
       </section>
-
-      <!-- 10. Терміни (cond) -->
+      <!-- 10 Терміни -->
       <section class="step" data-step="9" data-cond="dates" data-cond-value="Так" data-cond-field="when">
-        <h2 class="font-display text-2xl font-extrabold text-navy mb-1">Готові вказати терміни?</h2>
-        <p class="text-muted mb-6">Коли могли б почати роботу.</p>
+        <h2 class="font-display text-2xl font-extrabold text-navy mb-1" data-uk="Готові вказати терміни?" data-ru="Готовы указать сроки?">Готові вказати терміни?</h2>
+        <p class="text-muted mb-6" data-uk="Коли могли б почати роботу." data-ru="Когда могли бы начать работу.">Коли могли б почати роботу.</p>
         <div class="space-y-3">
-          <label class="opt block"><input type="radio" name="dates" value="Так"><span class="opt-body">Так<span class="opt-tick material-symbols-outlined">check_circle</span></span></label>
-          <label class="opt block"><input type="radio" name="dates" value="Ні"><span class="opt-body">Ні<span class="opt-tick material-symbols-outlined">check_circle</span></span></label>
+          <label class="opt block"><input type="radio" name="dates" value="Так"><span class="opt-body"><span data-uk="Так" data-ru="Да">Так</span><span class="opt-tick material-symbols-outlined">check_circle</span></span></label>
+          <label class="opt block"><input type="radio" name="dates" value="Ні"><span class="opt-body"><span data-uk="Ні" data-ru="Нет">Ні</span><span class="opt-tick material-symbols-outlined">check_circle</span></span></label>
         </div>
         <div class="reveal" id="reveal-when"><div>
-          <input id="when" type="text" class="qinput" placeholder="Орієнтовні терміни / графік доступності"/>
+          <input id="when" type="text" class="qinput" placeholder="Орієнтовні терміни / графік доступності" data-uk-ph="Орієнтовні терміни / графік доступності" data-ru-ph="Ориентировочные сроки / график доступности"/>
         </div></div>
       </section>
 
-      <!-- Nav -->
       <div class="flex items-center gap-3 mt-8">
         <button type="button" id="btnBack" class="hidden items-center gap-1.5 h-14 px-5 rounded-full border-2 border-line text-muted font-semibold hover:bg-white/60 transition">
-          <span class="material-symbols-outlined text-[20px]">arrow_back</span> Назад
+          <span class="material-symbols-outlined text-[20px]">arrow_back</span> <span data-uk="Назад" data-ru="Назад">Назад</span>
         </button>
         <button type="button" id="btnNext" class="flex-1 flex items-center justify-center gap-1.5 h-14 px-6 rounded-full bg-navy text-white font-display font-bold text-lg hover:bg-navy-ink active:scale-[.99] transition shadow-lg shadow-navy/25">
-          Далі <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+          <span id="nextText">Далі</span> <span class="material-symbols-outlined text-[20px]" id="nextIcon">arrow_forward</span>
         </button>
       </div>
     </form>
 
-    <!-- Success -->
     <section id="success" class="hidden px-6 sm:px-10 py-16 text-center">
       <div class="pop mx-auto mb-5 h-20 w-20">
         <svg viewBox="0 0 52 52" class="h-full w-full">
@@ -230,11 +230,11 @@
           <path class="check-mark" fill="none" stroke="#03105b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" d="M15 27 l7 7 l15 -16"/>
         </svg>
       </div>
-      <h2 class="font-display text-3xl font-extrabold text-navy mb-2">Дякуємо! 🎉</h2>
-      <p class="text-muted max-w-sm mx-auto">Вашу анкету надіслано. Ми зв'яжемося з вами найближчим часом щодо роботи в клініці Aura Dental.</p>
+      <h2 class="font-display text-3xl font-extrabold text-navy mb-2" data-uk="Дякуємо! 🎉" data-ru="Спасибо! 🎉">Дякуємо! 🎉</h2>
+      <p class="text-muted max-w-sm mx-auto" data-uk="Вашу анкету надіслано. Ми зв'яжемося з вами найближчим часом щодо роботи в клініці Aura Dental." data-ru="Ваша анкета отправлена. Мы свяжемся с вами в ближайшее время по поводу работы в клинике Aura Dental.">Вашу анкету надіслано. Ми зв'яжемося з вами найближчим часом щодо роботи в клініці Aura Dental.</p>
     </section>
   </div>
-  <p class="text-center text-[12px] text-muted mt-5">© Aura Dental · Познань · дослідження ринку</p>
+  <p class="text-center text-[12px] text-muted mt-5" data-uk="© Aura Dental · Познань · дослідження ринку" data-ru="© Aura Dental · Познань · исследование рынка">© Aura Dental · Познань · дослідження ринку</p>
 </main>
 
 <script>
@@ -242,13 +242,20 @@
   const form = document.getElementById('quiz');
   const steps = [...form.querySelectorAll('.step')];
   const total = steps.length;
-  let cur = 0;
-  let goingBack = false;
+  let cur = 0, goingBack = false, LANG = 'uk';
+
+  const T = {
+    uk: { next:'Далі', submit:'Надіслати анкету', sending:'Надсилаємо…' },
+    ru: { next:'Далее', submit:'Отправить анкету', sending:'Отправляем…' }
+  };
 
   const barFill = document.getElementById('barFill');
   const stepLabel = document.getElementById('stepLabel');
   const btnBack = document.getElementById('btnBack');
   const btnNext = document.getElementById('btnNext');
+  const nextText = document.getElementById('nextText');
+  const nextIcon = document.getElementById('nextIcon');
+  const langBtns = document.querySelectorAll('.lang-btn');
 
   const GFORM = 'https://docs.google.com/forms/d/e/1FAIpQLSdvV98YDId4si4kslKHcSjtzEBwmctsfisA1AUtVVb5NZjG-A/formResponse';
   const MAP = { fname:'entry.576774029', lname:'entry.1604473452', city:'entry.1863805960',
@@ -257,6 +264,28 @@
     dates:'entry.708726327', when:'entry.1897313351' };
   const SPEC = 'entry.1249115322';
 
+  function setLang(lang){
+    LANG = (lang === 'ru') ? 'ru' : 'uk';
+    document.documentElement.lang = LANG;
+    document.querySelectorAll('[data-uk]').forEach(el => {
+      const v = LANG === 'ru' ? el.getAttribute('data-ru') : el.getAttribute('data-uk');
+      if (v != null) el.textContent = v;
+    });
+    document.querySelectorAll('[data-uk-ph]').forEach(el => {
+      const v = LANG === 'ru' ? el.getAttribute('data-ru-ph') : el.getAttribute('data-uk-ph');
+      if (v != null) el.placeholder = v;
+    });
+    langBtns.forEach(b => b.classList.toggle('active', b.dataset.lang === LANG));
+    updateNav();
+    try { localStorage.setItem('auraLang', LANG); } catch(e){}
+  }
+
+  function updateNav() {
+    const last = cur === total - 1;
+    nextText.textContent = last ? T[LANG].submit : T[LANG].next;
+    nextIcon.textContent = last ? 'send' : 'arrow_forward';
+  }
+
   function show(i) {
     steps.forEach((s, idx) => { s.classList.toggle('active', idx === i); s.classList.toggle('back', goingBack); });
     cur = i;
@@ -264,26 +293,17 @@
     stepLabel.textContent = (i + 1) + ' / ' + total;
     btnBack.classList.toggle('hidden', i === 0);
     btnBack.classList.toggle('flex', i !== 0);
-    const sec = steps[i];
-    const isPlainChoice = sec.hasAttribute('data-choice');
-    btnNext.classList.toggle('hidden', isPlainChoice);
-    btnNext.innerHTML = (i === total - 1)
-      ? 'Надіслати анкету <span class="material-symbols-outlined text-[20px]">send</span>'
-      : 'Далі <span class="material-symbols-outlined text-[20px]">arrow_forward</span>';
-    const f = sec.querySelector('input[type=text], input[type=tel]');
+    btnNext.classList.toggle('hidden', steps[i].hasAttribute('data-choice'));
+    updateNav();
+    const f = steps[i].querySelector('input[type=text], input[type=tel]');
     if (f) setTimeout(() => f.focus({ preventScroll: true }), 80);
   }
 
-  function next() {
-    goingBack = false;
-    if (!validate(cur)) return;
-    if (cur < total - 1) show(cur + 1); else submit();
-  }
+  function next() { goingBack = false; if (!validate(cur)) return; if (cur < total - 1) show(cur + 1); else submit(); }
   function back() { if (cur > 0) { goingBack = true; show(cur - 1); } }
 
   function validate(i) {
     const sec = steps[i];
-    // text inputs
     const inp = sec.querySelector('#fname, #lname, #phone');
     if (inp && sec.dataset.step !== '2') {
       const isPhone = inp.id === 'phone';
@@ -292,20 +312,15 @@
       const e = sec.querySelector('.err'); if (e) e.classList.toggle('hidden', ok);
       if (!ok) return false;
     }
-    // multi
     if (sec.dataset.multi) {
       const any = sec.querySelector('input[name="'+sec.dataset.multi+'"]:checked');
       const e = sec.querySelector('.err'); if (e) e.classList.toggle('hidden', !!any);
       if (!any) return false;
     }
-    // cond choice must have a selection
-    if (sec.dataset.cond) {
-      if (!sec.querySelector('input[name="'+sec.dataset.cond+'"]:checked')) return false;
-    }
+    if (sec.dataset.cond && !sec.querySelector('input[name="'+sec.dataset.cond+'"]:checked')) return false;
     return true;
   }
 
-  // Auto-advance for plain single choice; reveal for conditional
   form.addEventListener('change', (e) => {
     const sec = e.target.closest('.step');
     if (!sec) return;
@@ -316,25 +331,21 @@
       const rev = document.getElementById('reveal-' + sec.dataset.condField);
       if (rev) rev.classList.toggle('open', e.target.value === sec.dataset.condValue);
     }
-    if (sec.dataset.multi) {
-      const err = sec.querySelector('.err'); if (err) err.classList.add('hidden');
-    }
+    if (sec.dataset.multi) { const err = sec.querySelector('.err'); if (err) err.classList.add('hidden'); }
   });
 
-  // Enter key advances on text steps
   form.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && e.target.tagName === 'INPUT') { e.preventDefault(); next(); }
   });
-  ['fname','lname','phone'].forEach(id => {
-    document.getElementById(id).addEventListener('input', (ev) => ev.target.classList.remove('field-err'));
-  });
-
+  ['fname','lname','phone'].forEach(id => document.getElementById(id).addEventListener('input', ev => ev.target.classList.remove('field-err')));
   btnNext.addEventListener('click', next);
   btnBack.addEventListener('click', back);
+  langBtns.forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
 
   function submit() {
     btnNext.disabled = true;
-    btnNext.innerHTML = '<span class="material-symbols-outlined animate-spin text-[20px]">progress_activity</span> Надсилаємо…';
+    nextText.textContent = T[LANG].sending; nextIcon.textContent = 'progress_activity';
+    nextIcon.classList.add('animate-spin');
     const v = id => (document.getElementById(id)?.value || '').trim();
     const r = n => (form.querySelector('input[name="'+n+'"]:checked')||{}).value || '';
     const b = new URLSearchParams();
@@ -355,10 +366,14 @@
       .finally(() => {
         form.classList.add('hidden');
         document.getElementById('progressWrap').classList.add('hidden');
-        const s = document.getElementById('success'); s.classList.remove('hidden');
+        document.getElementById('success').classList.remove('hidden');
       });
   }
 
+  // init: inherit language chosen on landing
+  let saved = 'uk';
+  try { saved = localStorage.getItem('auraLang') || 'uk'; } catch(e){}
+  setLang(saved);
   show(0);
 })();
 </script>
