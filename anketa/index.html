@@ -238,6 +238,11 @@ src="https://www.facebook.com/tr?id=2244023079681248&ev=PageView&noscript=1"
           <span id="nextText">Далі</span> <span class="material-symbols-outlined text-[20px]" id="nextIcon">arrow_forward</span>
         </button>
       </div>
+
+      <p id="rodoNote" class="text-[12px] text-muted mt-4 leading-snug transition-opacity duration-300">
+        <span data-uk="Надсилаючи форму, ви передаєте свої дані для рекрутингу. Ми обробляємо їх згідно з" data-ru="Отправляя форму, вы передаёте свои данные для рекрутинга. Мы обрабатываем их согласно">Надсилаючи форму, ви передаєте свої дані для рекрутингу. Ми обробляємо їх згідно з</span>
+        <a href="/polityka/" target="_blank" rel="noopener" class="text-navy underline underline-offset-2 hover:text-teal"><span data-uk="Політикою приватності" data-ru="Политике конфиденциальности">Політикою приватності</span></a>.
+      </p>
     </form>
 
     <section id="success" class="hidden px-6 sm:px-10 py-16 text-center">
@@ -312,6 +317,7 @@ src="https://www.facebook.com/tr?id=2244023079681248&ev=PageView&noscript=1"
     btnBack.classList.toggle('flex', i !== 0);
     btnNext.classList.toggle('hidden', steps[i].hasAttribute('data-choice'));
     updateNav();
+    syncRodoNote();
     const f = steps[i].querySelector('input[type=text], input[type=tel]');
     if (f) setTimeout(() => f.focus({ preventScroll: true }), 80);
   }
@@ -355,6 +361,12 @@ src="https://www.facebook.com/tr?id=2244023079681248&ev=PageView&noscript=1"
     if (e.key === 'Enter' && e.target.tagName === 'INPUT') { e.preventDefault(); next(); }
   });
   ['fname','lname','phone'].forEach(id => document.getElementById(id).addEventListener('input', ev => ev.target.classList.remove('field-err')));
+
+  // RODO notice: show only on the first question; hide once the name is filled or we advance
+  const rodoNote = document.getElementById('rodoNote');
+  const fnameEl = document.getElementById('fname');
+  const syncRodoNote = () => { if (rodoNote) rodoNote.classList.toggle('hidden', cur > 0 || fnameEl.value.trim().length > 0); };
+  fnameEl.addEventListener('input', syncRodoNote);
   btnNext.addEventListener('click', next);
   btnBack.addEventListener('click', back);
   langBtns.forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
