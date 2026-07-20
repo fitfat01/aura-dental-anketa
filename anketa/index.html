@@ -7,6 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@24,400,0..1&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css"/>
 <script>
   tailwind.config = { theme: { extend: {
     colors: {
@@ -53,6 +54,13 @@
   }
   .qinput:focus { border-color: #26c6da; box-shadow: 0 0 0 4px rgba(38,198,218,.15); }
   .field-err { border-color: #ba1a1a !important; box-shadow: 0 0 0 4px rgba(186,26,26,.12) !important; }
+
+  /* intl-tel-input — під наш стиль */
+  .iti { width: 100%; display: block; }
+  .iti__selected-flag { border-top-left-radius: 9999px; border-bottom-left-radius: 9999px; padding-left: 20px; }
+  .iti--separate-dial-code .iti__selected-dial-code { font-size: 1.05rem; font-weight: 600; color: #191c1e; }
+  .iti__country-list { border-radius: 16px; text-align: left; font-size: .95rem; box-shadow: 0 18px 40px -12px rgba(3,16,91,.3); }
+  .iti__country.iti__highlight { background: #eef1f6; }
 
   .reveal { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows .35s ease, opacity .35s ease, margin .35s ease; margin-top: 0; }
   .reveal > div { overflow: hidden; }
@@ -150,8 +158,8 @@ src="https://www.facebook.com/tr?id=2244023079681248&ev=PageView&noscript=1"
       <section class="step" data-step="3">
         <h2 class="font-display text-2xl font-extrabold text-navy mb-1" data-uk="Номер телефону" data-ru="Номер телефона">Номер телефону</h2>
         <p class="text-muted mb-6" data-uk="Ми зв'яжемося з вами щодо роботи." data-ru="Мы свяжемся с вами по поводу работы.">Ми зв'яжемося з вами щодо роботи.</p>
-        <input id="phone" type="tel" inputmode="tel" autocomplete="tel" class="qinput" placeholder="+48 / +380 …" data-uk-ph="+48 / +380 …" data-ru-ph="+48 / +380 …"/>
-        <p class="err text-danger text-sm mt-2 hidden" data-uk="Вкажіть коректний номер (мін. 9 цифр)" data-ru="Укажите корректный номер (мин. 9 цифр)">Вкажіть коректний номер (мін. 9 цифр)</p>
+        <input id="phone" type="tel" inputmode="tel" autocomplete="tel" class="qinput"/>
+        <p class="err text-danger text-sm mt-2 hidden" id="phoneErr">Вкажіть коректний номер телефону</p>
         <p class="text-[13px] text-muted mt-3 flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px]">lock</span> <span data-uk="Дані використовуються лише для зв'язку щодо роботи." data-ru="Данные используются только для связи по работе.">Дані використовуються лише для зв'язку щодо роботи.</span></p>
       </section>
       <!-- 5 PWZ -->
@@ -259,6 +267,7 @@ src="https://www.facebook.com/tr?id=2244023079681248&ev=PageView&noscript=1"
   <p class="text-center text-[12px] text-muted mt-5" data-uk="© Everident · Познань · дослідження ринку" data-ru="© Everident · Познань · исследование рынка">© Everident · Познань · дослідження ринку</p>
 </main>
 
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
 <script>
 (function () {
   const form = document.getElementById('quiz');
@@ -267,8 +276,10 @@ src="https://www.facebook.com/tr?id=2244023079681248&ev=PageView&noscript=1"
   let cur = 0, goingBack = false, LANG = 'uk';
 
   const T = {
-    uk: { next:'Далі', submit:'Надіслати анкету', sending:'Надсилаємо…' },
-    ru: { next:'Далее', submit:'Отправить анкету', sending:'Отправляем…' }
+    uk: { next:'Далі', submit:'Надіслати анкету', sending:'Надсилаємо…',
+          phoneEmpty:'Вкажіть номер телефону', phoneBad:'Невірний номер — перевірте ще раз' },
+    ru: { next:'Далее', submit:'Отправить анкету', sending:'Отправляем…',
+          phoneEmpty:'Укажите номер телефона', phoneBad:'Неверный номер — проверьте ещё раз' }
   };
 
   const barFill = document.getElementById('barFill');
@@ -285,6 +296,21 @@ src="https://www.facebook.com/tr?id=2244023079681248&ev=PageView&noscript=1"
     working:'entry.1190108215', where:'entry.541356671', format:'entry.1471097491',
     dates:'entry.708726327', when:'entry.1897313351' };
   const SPEC = 'entry.1249115322';
+
+  // --- Телефон: intl-tel-input (країна + валідація libphonenumber) ---
+  const phoneInput = document.getElementById('phone');
+  const phoneErr = document.getElementById('phoneErr');
+  let iti = null;
+  if (window.intlTelInput && phoneInput) {
+    iti = window.intlTelInput(phoneInput, {
+      initialCountry: 'pl',
+      preferredCountries: ['pl', 'ua', 'by'],
+      separateDialCode: true,
+      autoPlaceholder: 'aggressive',
+      utilsScript: 'https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js'
+    });
+  }
+  const utilsReady = () => !!(iti && window.intlTelInputUtils);
 
   function setLang(lang){
     LANG = (lang === 'ru') ? 'ru' : 'uk';
@@ -330,7 +356,22 @@ src="https://www.facebook.com/tr?id=2244023079681248&ev=PageView&noscript=1"
     const inp = sec.querySelector('#fname, #lname, #phone');
     if (inp && sec.dataset.step !== '2') {
       const isPhone = inp.id === 'phone';
-      const ok = isPhone ? inp.value.replace(/\D/g,'').length >= 9 : inp.value.trim().length >= 1;
+      let ok;
+      if (isPhone) {
+        const raw = inp.value.trim();
+        if (!raw) {
+          ok = false;
+          if (phoneErr) phoneErr.textContent = T[LANG].phoneEmpty;
+        } else if (utilsReady()) {
+          ok = iti.isValidNumber();
+          if (!ok && phoneErr) phoneErr.textContent = T[LANG].phoneBad;
+        } else {
+          ok = raw.replace(/\D/g, '').length >= 7;
+          if (!ok && phoneErr) phoneErr.textContent = T[LANG].phoneBad;
+        }
+      } else {
+        ok = inp.value.trim().length >= 1;
+      }
       inp.classList.toggle('field-err', !ok);
       const e = sec.querySelector('.err'); if (e) e.classList.toggle('hidden', ok);
       if (!ok) return false;
@@ -381,7 +422,10 @@ src="https://www.facebook.com/tr?id=2244023079681248&ev=PageView&noscript=1"
     b.append(MAP.fname, v('fname'));
     b.append(MAP.lname, v('lname'));
     if (v('city')) b.append(MAP.city, v('city'));
-    b.append(MAP.phone, v('phone'));
+    const phoneOut = utilsReady()
+      ? iti.getNumber()
+      : (iti ? '+' + iti.getSelectedCountryData().dialCode + v('phone').replace(/\D/g, '') : v('phone'));
+    b.append(MAP.phone, phoneOut);
     b.append(MAP.pwz, r('pwz'));
     b.append(MAP.nostr, r('nostr'));
     form.querySelectorAll('input[name="spec"]:checked').forEach(c => b.append(SPEC, c.value));
