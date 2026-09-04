@@ -1,0 +1,737 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Відкрий власну стоматологічну клініку в Польщі - Everident</title>
+<meta name="description" content="Відкриваємо стоматологічні клініки в Польщі разом з лікарями. Вкладаємось обидва - клініка спільна.">
+<meta property="og:title" content="Відкрий власну клініку в Польщі. Ти лікар і хочеш відкрити власну клініку в Польщі?">
+<meta property="og:description" content="Відкриваємо стоматологічні клініки в Польщі разом з лікарями.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Everident: Navy #03105B · Teal #26C6DA · Teal Soft #5CE9FE
+   Manrope усюди - Plus Jakarta Sans не має кирилиці.
+   Один яскравий колір на екран (brandbook) - працюємо teal + navy. */
+:root{
+  --navy:#03105B; --navy-ink:#000B58; --teal:#26C6DA; --teal-soft:#5CE9FE;
+  --field:#DCEEF4; --field-2:#C9E6EF; --ink:#191C1E; --muted:#4B5563;
+  --r:30px; --wrap:1200px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Manrope,system-ui,-apple-system,sans-serif;background:var(--field);
+  color:var(--navy);line-height:1.4;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 18px}
+h1,h2,h3{font-weight:800;letter-spacing:-.04em;line-height:.98;color:var(--navy)}
+h1{font-size:clamp(34px,5.2vw,64px)}
+h2{font-size:clamp(28px,4.4vw,52px);letter-spacing:-.04em}
+h3{font-size:clamp(20px,2.4vw,26px);letter-spacing:-.03em;line-height:1.1}
+p{color:var(--muted);font-size:15.5px;line-height:1.55;font-weight:500}
+.big{font-size:clamp(16px,1.6vw,18.5px);line-height:1.5;font-weight:500}
+strong{font-weight:800;color:var(--navy)}
+
+/* ---- bento ---- */
+.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.tile{border-radius:var(--r);padding:clamp(26px,3.2vw,44px);background:#fff;
+  display:flex;flex-direction:column;justify-content:space-between;position:relative}
+.tile.top{justify-content:flex-start}
+.c4{grid-column:span 4} .c5{grid-column:span 5} .c6{grid-column:span 6}
+.c7{grid-column:span 7} .c8{grid-column:span 8} .c12{grid-column:span 12}
+.navy{background:var(--navy);color:#fff}
+.navy h1,.navy h2,.navy h3{color:#fff} .navy p{color:rgba(255,255,255,.75)}
+.navy strong{color:var(--teal-soft)}
+.tealbg{background:var(--teal)} .tealbg h1,.tealbg h2,.tealbg h3{color:var(--navy)}
+.tealbg p{color:rgba(3,16,91,.72)}
+.soft{background:var(--field-2)}
+
+.eyebrow{display:inline-block;font-size:11.5px;font-weight:800;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.navy .eyebrow{color:var(--teal)}
+.tealbg .eyebrow{color:var(--navy);opacity:.6}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--navy);
+  color:#fff;font-weight:800;font-size:16.5px;padding:17px 32px;border-radius:999px;
+  text-decoration:none;border:0;cursor:pointer;font-family:inherit;transition:.14s}
+.btn:hover{background:var(--navy-ink);transform:translateY(-1px)}
+.btn-teal{background:var(--teal);color:var(--navy)}
+.btn-teal:hover{background:var(--teal-soft)}
+
+/* header */
+header{padding:20px 0;position:sticky;top:0;z-index:60;background:var(--field)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px}
+header img{height:28px;display:block}
+.hdr-cta{color:var(--navy);text-decoration:none;font-weight:800;font-size:14.5px;
+  background:#fff;padding:11px 22px;border-radius:999px;white-space:nowrap}
+.hdr-cta:hover{background:var(--teal-soft)}
+
+/* hero */
+.hero{padding:6px 0 14px}
+.hero h1{font-size:clamp(32px,4.4vw,54px)}
+.hero h1 em{font-style:normal;color:var(--teal)}
+.hero .btn{margin-top:auto;align-self:flex-start}
+.hero-note{font-size:13.5px;color:rgba(255,255,255,.55);margin-top:14px;font-weight:500}
+.tile-hero{min-height:clamp(360px,44vw,470px);gap:30px}
+.tile-hero.withfig{display:grid;grid-template-columns:1.5fr .95fr;align-items:end;
+  gap:8px;padding-bottom:0;padding-right:0;overflow:hidden}
+.tile-hero.withfig .htext{display:flex;flex-direction:column;justify-content:space-between;
+  gap:26px;padding-bottom:clamp(26px,3.2vw,44px)}
+.figwrap{align-self:end;position:relative}
+.figwrap:before{content:"";position:absolute;left:50%;bottom:-6%;transform:translateX(-50%);
+  width:132%;aspect-ratio:1;border-radius:50%;background:rgba(38,198,218,.18)}
+.figwrap img{position:relative;width:122%;max-width:none;margin-left:-11%;display:block;filter:drop-shadow(0 18px 40px rgba(0,0,0,.35))}
+
+/* number tile */
+.num{font-size:clamp(52px,7vw,84px);font-weight:800;letter-spacing:-.055em;line-height:.9;color:var(--navy)}
+.navy .num{color:var(--teal)}
+.numlabel{font-size:15px;font-weight:700;color:var(--muted);margin-top:12px;line-height:1.3}
+.navy .numlabel{color:rgba(255,255,255,.72)}
+
+/* split list */
+.slist{list-style:none;margin-top:18px}
+.slist li{font-size:16.5px;font-weight:700;padding:11px 0;border-bottom:1px solid rgba(3,16,91,.1)}
+.slist li:last-child{border:0}
+.navy .slist li{color:#fff;font-weight:600;border-color:rgba(255,255,255,.14)}
+.tealbg .slist li{color:var(--navy);border-color:rgba(3,16,91,.16)}
+
+
+/* ролі: фігура в центрі, іконки обабіч */
+.roles{display:grid;grid-template-columns:1fr .78fr 1fr;gap:clamp(18px,2.6vw,44px);
+  align-items:end;margin-top:clamp(24px,3vw,40px)}
+.rolecol{display:flex;flex-direction:column;gap:6px;padding-bottom:18px}
+.rolecol.l{text-align:right}
+.item{display:flex;align-items:center;gap:14px;padding:13px 0}
+.rolecol.l .item{flex-direction:row-reverse}
+.badge{width:46px;height:46px;border-radius:14px;flex:0 0 auto;display:grid;place-items:center;
+  background:var(--field);color:var(--navy)}
+.badge.us{background:var(--navy);color:var(--teal)}
+.ic{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.6;
+  stroke-linecap:round;stroke-linejoin:round}
+.item b{display:block;font-size:16px;font-weight:800;letter-spacing:-.02em;line-height:1.25;color:var(--navy)}
+.item span{display:block;font-size:13.5px;color:var(--muted);font-weight:500;margin-top:2px;line-height:1.35}
+.rolefig{position:relative;align-self:end;display:flex;align-items:flex-end;
+  justify-content:center;overflow:hidden;
+  /* низ - півколо, верх відкритий: голова виходить за коло */
+  border-radius:0 0 999px 999px;
+  aspect-ratio:1/1.42}
+.rolefig:before{content:"";position:absolute;left:0;bottom:0;width:100%;aspect-ratio:1;
+  border-radius:50%;background:radial-gradient(circle at 50% 40%,var(--field-2),var(--field));z-index:0}
+.rolefig img{position:relative;z-index:1;width:88%;height:auto;max-width:none;display:block}
+.rolehead{text-align:center}
+.rolelabel{font-size:11.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);padding-bottom:10px;border-bottom:1px solid var(--line);margin-bottom:6px}
+.rolecol.r .rolelabel{color:var(--navy)}
+@media(max-width:940px){
+  .roles{grid-template-columns:1fr;gap:8px}
+  .rolefig{display:none}
+  .rolecol.l{text-align:left}
+  .rolecol.l .item{flex-direction:row}
+  .rolecol{padding-bottom:0}
+}
+
+
+
+/* фон героя: силует зуба + лінії */
+.tile-hero{position:relative}
+.tile-hero > *{position:relative;z-index:1}
+.tile-hero > .herobg{position:absolute;inset:0;overflow:hidden;border-radius:inherit;
+  pointer-events:none;z-index:0;grid-area:1/1/-1/-1}
+.herobg svg{position:absolute}
+.herobg .tooth{right:-4%;top:-14%;height:130%;width:auto;opacity:.07;color:var(--teal-soft)}
+.herobg .lines{left:0;bottom:0;width:100%;height:58%;opacity:.16;color:var(--teal)}
+
+/* індикатор прогресу */
+#bar{position:fixed;top:0;left:0;height:3px;width:0;z-index:100;background:var(--teal);
+  transition:width .1s linear}
+/* рейка секцій */
+#rail{position:fixed;right:26px;top:50%;transform:translateY(-50%);z-index:90;
+  display:flex;flex-direction:column;align-items:flex-end;gap:0}
+#rail .pct{font-size:10.5px;font-weight:800;letter-spacing:.1em;color:var(--navy);opacity:.42;
+  font-variant-numeric:tabular-nums;margin-bottom:12px}
+#rail .track{position:relative;width:2px;background:rgba(3,16,91,.14);border-radius:2px;
+  margin-right:12px;align-self:flex-end}
+#rail .fill{position:absolute;left:0;top:0;width:100%;background:var(--teal);border-radius:2px;
+  height:0;transition:height .12s linear}
+#rail .items{position:absolute;right:0;top:0;height:100%;display:flex;flex-direction:column;
+  justify-content:space-between;align-items:flex-end}
+#rail a{display:flex;align-items:center;gap:10px;text-decoration:none;
+  transform:translateX(7px);position:relative}
+#rail .n{font-size:10.5px;font-weight:800;color:var(--navy);font-variant-numeric:tabular-nums;
+  opacity:0;transition:.18s;letter-spacing:.06em}
+#rail .lb{font-size:12.5px;font-weight:700;color:var(--navy);white-space:nowrap;
+  opacity:0;transform:translateX(8px);transition:.18s}
+#rail .tick{width:12px;height:2px;background:rgba(3,16,91,.28);border-radius:2px;
+  transition:.18s;flex:0 0 auto}
+#rail a:hover .lb,#rail a:hover .n{opacity:.65;transform:none}
+#rail a:hover .tick{width:20px;background:var(--navy)}
+#rail a.on .tick{width:26px;height:3px;background:var(--navy)}
+#rail a.on .n{opacity:1}
+#rail a.on .lb{opacity:1;transform:none}
+
+/* футер */
+footer{background:var(--navy);color:rgba(255,255,255,.62);padding:56px 0 30px;font-size:14.5px;font-weight:500}
+.fgrid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:34px}
+.fgrid h4{font-size:11.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--teal);margin-bottom:14px}
+.fgrid a{color:rgba(255,255,255,.72);text-decoration:none;display:block;padding:5px 0}
+.fgrid a:hover{color:#fff}
+.fbrand img{height:26px;margin-bottom:14px}
+.fbrand p{color:rgba(255,255,255,.6);font-size:14.5px;max-width:30ch}
+.fbot{margin-top:40px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14);
+  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:13.5px;
+  color:rgba(255,255,255,.45)}
+.fbot a{color:rgba(255,255,255,.7)}
+@media(max-width:940px){
+  #rail{display:none}
+  .fgrid{grid-template-columns:1fr 1fr;gap:26px}
+}
+
+/* фото */
+.tile.img{padding:0}
+.tile.img img{width:100%;height:100%;object-fit:cover;display:block}
+.inset{width:100%;border-radius:20px;display:block;margin-top:22px;aspect-ratio:4/3;object-fit:cover}
+.band{border-radius:var(--r);overflow:hidden;height:clamp(230px,26vw,340px)}
+.band img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+.step{background:#fff;border-radius:22px;padding:26px}
+.step .i{font-size:13px;font-weight:800;color:var(--teal);letter-spacing:.1em;margin-bottom:10px}
+.step b{display:block;font-size:18px;font-weight:800;letter-spacing:-.025em;line-height:1.15}
+.step span{display:block;font-size:14.5px;color:var(--muted);margin-top:6px;font-weight:500;line-height:1.4}
+
+/* faq */
+details{background:#fff;border-radius:20px;padding:22px 26px;margin-bottom:10px}
+details summary{cursor:pointer;font-weight:800;font-size:18px;letter-spacing:-.025em;list-style:none;
+  display:flex;justify-content:space-between;gap:18px;align-items:flex-start}
+details summary::-webkit-details-marker{display:none}
+details summary:after{content:"+";font-size:26px;line-height:.85;color:var(--teal);font-weight:700}
+details[open] summary:after{content:"-"}
+details p{margin-top:12px;max-width:66ch}
+
+/* form */
+form{margin-top:8px}
+label{display:block;font-weight:800;font-size:13px;margin:18px 0 7px;letter-spacing:.01em;color:#fff}
+label:first-of-type{margin-top:0}
+input[type=text],input[type=tel],textarea{width:100%;font-family:inherit;font-size:16px;font-weight:600;
+  padding:15px 17px;border:0;border-radius:14px;background:rgba(255,255,255,.1);color:#fff}
+input::placeholder,textarea::placeholder{color:rgba(255,255,255,.4)}
+textarea{min-height:86px;resize:vertical}
+input:focus,textarea:focus{outline:0;background:rgba(255,255,255,.17);box-shadow:0 0 0 2px var(--teal)}
+.radios{display:grid;gap:8px}
+.radios label{display:flex;align-items:center;gap:11px;font-weight:600;font-size:15.5px;color:#fff;
+  background:rgba(255,255,255,.1);border-radius:14px;padding:14px 17px;margin:0;cursor:pointer;letter-spacing:0}
+.radios label:has(input:checked){background:var(--teal);color:var(--navy)}
+.radios input{accent-color:var(--navy);width:18px;height:18px}
+.consent{display:flex;gap:11px;align-items:flex-start;margin:20px 0 2px}
+.consent input{margin-top:3px;accent-color:var(--teal);width:17px;height:17px;flex:0 0 auto}
+.consent label{margin:0;font-weight:500;font-size:12.5px;color:rgba(255,255,255,.65);line-height:1.5}
+.consent a{color:var(--teal-soft)}
+form .btn{width:100%;margin-top:20px}
+.err{color:#FF8A8A;font-size:12.5px;font-weight:700;margin-top:6px;display:none}
+.note{font-size:12.5px;color:rgba(255,255,255,.5);margin-top:13px;text-align:center;font-weight:500}
+.ok{display:none;text-align:center;padding:40px 10px}
+
+.sticky{display:none;position:fixed;left:0;right:0;bottom:0;z-index:70;padding:11px 16px;
+  background:rgba(220,238,244,.95);backdrop-filter:blur(10px)}
+.sticky .btn{width:100%}
+
+footer{padding:30px 0 34px;font-size:13.5px;color:rgba(3,16,91,.5);font-weight:600}
+footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+footer a{color:var(--navy)}
+section{padding:52px 0}
+
+@media(max-width:940px){
+  .c4,.c5,.c6,.c7,.c8{grid-column:span 12}
+  .steps{grid-template-columns:1fr}
+  .tile-hero{min-height:auto}
+  .tile-hero.withfig{grid-template-columns:1fr;padding-bottom:clamp(26px,3.2vw,44px)}
+  .figwrap{display:none}
+  header{position:static}.hdr-cta{display:none}
+  .sticky{display:block} body{padding-bottom:76px}
+  section{padding:36px 0}
+}
+
+/* ---- мобільна щільність: менше тексту й повітря на телефоні ---- */
+@media(max-width:640px){
+  .m-hide{display:none!important}
+  :root{--r:24px}
+  .wrap{padding:0 14px}
+  .bento{gap:10px}
+  .tile{padding:22px}
+  section{padding:26px 0}
+  h1{font-size:31px;line-height:1.02}
+  h2{font-size:26px;line-height:1.04}
+  h3{font-size:18.5px}
+  p{font-size:14.5px;line-height:1.5}
+  .big{font-size:15.5px;line-height:1.45}
+  .eyebrow{font-size:11px;margin-bottom:10px}
+  .btn{font-size:16px;padding:15px 26px}
+  .tile-hero{gap:20px}
+  .tile-hero.withfig .htext{gap:18px}
+  .hero-note{margin-top:11px;font-size:13px}
+  .num{font-size:46px}
+  .numlabel{font-size:14px;margin-top:8px}
+  .slist{margin-top:2px}
+  .slist li{font-size:15.5px;padding:9px 0}
+  .item{padding:9px 0;gap:12px}
+  .badge{width:40px;height:40px;border-radius:12px}
+  .roles{margin-top:14px}
+  .steps{gap:8px}
+  .step{padding:15px 18px;border-radius:16px;display:flex;align-items:baseline;gap:12px}
+  .step .i{margin-bottom:0;font-size:12px;flex:0 0 auto}
+  .step b{font-size:16px;line-height:1.2}
+  .step span{display:none}
+  details{padding:16px 18px;border-radius:16px;margin-bottom:8px}
+  details summary{font-size:16.5px;gap:12px}
+  details summary:after{font-size:22px}
+  .fgrid{grid-template-columns:1fr;gap:16px}
+  footer{padding:26px 0 22px}
+  .fbot{margin-top:24px;padding-top:16px}
+  label{margin:14px 0 6px}
+  .radios label{padding:12px 15px;font-size:15px}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-tooth" viewBox="0 0 24 24"><path d="M12 4.2c-.6-.5-1.4-.9-2.4-.9-2.2 0-3.8 1.7-3.8 4 0 2.6 1 4.4 1.5 6.9.4 2 .6 4.6 1.8 4.6 1.1 0 1.2-2.4 1.6-4.2.3-1.3.7-2.1 1.3-2.1s1 .8 1.3 2.1c.4 1.8.5 4.2 1.6 4.2 1.2 0 1.4-2.6 1.8-4.6.5-2.5 1.5-4.3 1.5-6.9 0-2.3-1.6-4-3.8-4-1 0-1.8.4-2.4.9z"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 19.5c0-3 2.7-4.8 6-4.8s6 1.8 6 4.8"/><path d="M16.4 11.4a2.7 2.7 0 000-5.4"/><path d="M17.6 15.4c2 .5 3.4 1.9 3.4 4.1"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v5.4c0 4.3-2.9 7.8-7 9.6-4.1-1.8-7-5.3-7-9.6V6l7-3z"/><path d="M9 12l2.2 2.2L15.2 10"/></symbol>
+<symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></symbol>
+<symbol id="i-wallet" viewBox="0 0 24 24"><path d="M3 8.5A2.5 2.5 0 015.5 6h13A2.5 2.5 0 0121 8.5v8a2.5 2.5 0 01-2.5 2.5h-13A2.5 2.5 0 013 16.5v-8z"/><path d="M16.6 12.5h1.6"/></symbol>
+<symbol id="i-build" viewBox="0 0 24 24"><path d="M4 21V6.5L11 3l7 3.5V21"/><path d="M9.5 21v-4.5h5V21"/><path d="M8 10h.01M12 10h.01M16 10h.01"/></symbol>
+<symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8l-5-5z"/><path d="M14 3v5h5"/><path d="M9 13.5h6M9 17h4"/></symbol>
+<symbol id="i-mega" viewBox="0 0 24 24"><path d="M3 11v2a1 1 0 001 1h2l5 4V6L6 10H4a1 1 0 00-1 1z"/><path d="M16 8.6a4 4 0 010 6.8"/></symbol>
+</defs></svg>
+
+<div id="bar"></div>
+
+<nav id="rail" aria-label="Розділи">
+  <div class="pct"><span id="pctv">0</span>%</div>
+  <div class="track" style="height:min(46vh,380px)">
+    <div class="fill" id="fill"></div>
+    <div class="items">
+      <a href="#top"><span class="lb">Початок</span><span class="n">01</span><i class="tick"></i></a>
+      <a href="#pwz"><span class="lb">Без PWZ</span><span class="n">02</span><i class="tick"></i></a>
+      <a href="#why"><span class="lb">Чому не почав</span><span class="n">03</span><i class="tick"></i></a>
+      <a href="#roles"><span class="lb">Зони відповідальності</span><span class="n">04</span><i class="tick"></i></a>
+      <a href="#benefits"><span class="lb">Що отримуєш</span><span class="n">05</span><i class="tick"></i></a>
+      <a href="#process"><span class="lb">Процес</span><span class="n">06</span><i class="tick"></i></a>
+      <a href="#trust"><span class="lb">Чому ми</span><span class="n">07</span><i class="tick"></i></a>
+      <a href="#faq"><span class="lb">Питання</span><span class="n">08</span><i class="tick"></i></a>
+      <a href="#form"><span class="lb">Заявка</span><span class="n">09</span><i class="tick"></i></a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <img src="img/everident-logo.svg" alt="Everident">
+    <a class="hdr-cta" href="#form">Залишити заявку</a>
+  </div>
+</header>
+
+<div class="hero" id="top">
+  <div class="wrap">
+    <div class="bento">
+      <div class="tile navy c8 tile-hero withfig">
+        <div class="herobg" aria-hidden="true">
+          <svg class="tooth" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.5 2 7 4 5.5 4S3 2.8 2.4 4.2C1.6 6.2 2.4 10 3.2 13c.6 2.4 1 5 2 6.6.5.8 1.4.8 1.8-.1.6-1.3.9-3.2 1.3-4.6.2-.7 1.2-.7 1.4 0 .4 1.4.7 3.3 1.3 4.6.4.9 1.3.9 1.8.1 1-1.6 1.4-4.2 2-6.6.8-3 1.6-6.8.8-8.8C19.5 2.8 19 4 17.5 4S15.5 2 12 2Z"/></svg>
+          <svg class="lines" viewBox="0 0 800 300" fill="none" stroke="currentColor" stroke-width="1.4" preserveAspectRatio="none">
+            <path d="M-40 210 C 160 130, 340 270, 560 180 S 820 120, 900 170"/>
+            <path d="M-40 246 C 170 168, 350 300, 570 214 S 830 156, 900 204"/>
+            <path d="M-40 282 C 180 206, 360 330, 580 248 S 840 192, 900 238"/>
+          </svg>
+        </div>
+        <div class="htext">
+        <div>
+          <span class="eyebrow">Партнерство зі стоматологами</span>
+          <h1 id="h1">Відкрий власну <em>стоматологічну клініку</em> в Польщі.</h1>
+        </div>
+        <div>
+          <p class="big" style="color:#fff;max-width:46ch;font-weight:700">Ти займаєшся медициною. Ми допомагаємо побудувати клініку.</p>
+          <p style="color:rgba(255,255,255,.72);max-width:52ch;margin-top:12px">Ми інвестуємо разом із тобою та беремо на себе бізнесову й операційну частину - від відкриття до розвитку клініки.</p>
+          <p class="m-hide" style="color:rgba(255,255,255,.72);max-width:52ch;margin-top:10px">Ти зосереджуєшся на медицині. Ми - на тому, щоб клініка працювала та зростала.</p>
+          <a class="btn btn-teal" href="#form" style="margin-top:26px">Дізнатись як</a>
+          <div class="hero-note">Перша розмова 30 хвилин. Безкоштовно, без зобов'язань.</div>
+        </div>
+        </div>
+        <div class="figwrap"><img src="img/doctor.png" alt=""></div>
+      </div>
+
+      <div class="c4" style="display:grid;gap:14px">
+        <div class="tile tealbg">
+          <span class="eyebrow">Розподіл</span>
+          <ul class="slist" style="margin-top:6px">
+            <li>Фінанси - вкладаємо разом</li>
+            <li>Медицина - на тобі</li>
+            <li>Операційка - на нас</li>
+            <li>Результат - спільний</li>
+          </ul>
+        </div>
+        <div class="tile">
+          <div class="num">6-8</div>
+          <div class="numlabel">Місяців від підписання договору до відкриття</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="pwz">
+  <div class="wrap">
+    <div class="bento">
+      <div class="tile tealbg c7">
+        <span class="eyebrow">Важливо</span>
+        <h2>Немає PWZ?<br>Клініку все одно можна відкрити</h2>
+        <p class="big" style="margin-top:18px;color:rgba(3,16,91,.8)"><strong>Власником клініки може бути будь-хто.</strong> Тобі не обов'язково мати PWZ, щоб володіти клінікою та керувати нею.</p>
+        <p style="margin-top:12px;color:rgba(3,16,91,.72)">Лікувати в ній ти зможеш після отримання необхідного дозволу.</p>
+      </div>
+      <div class="tile top c5">
+        <h3>Якщо ти проходиш ностріфікацію або чекаєш на новий PWZ</h3>
+        <p class="big" style="margin-top:14px"><strong>Клініка не повинна чекати разом із тобою.</strong></p>
+        <p style="margin-top:12px">Поки ти проходиш формальності, клініка вже може працювати та приносити дохід.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="wrap">
+    <div class="bento">
+      <div class="tile c12" style="padding-bottom:26px">
+        <span class="eyebrow">Знайомо?</span>
+        <h2>Чому ти досі не почав?</h2>
+      </div>
+      <div class="tile top c6"><h3>Не знаєш, з чого почати</h3><p class="m-hide" style="margin-top:10px">Ми знаємо, як пройти шлях відкриття клініки в Польщі - від ідеї до запуску.</p></div>
+      <div class="tile top c6"><h3>Не хочеш вкладати все сам</h3><p class="m-hide" style="margin-top:10px">Ми вкладаємо кошти разом із тобою та розподіляємо ризики.</p></div>
+      <div class="tile top c6"><h3>Лякають польські правила</h3><p class="m-hide" style="margin-top:10px">Документи, вимоги, дозволи та місцеві нюанси - беремо цю частину на себе.</p></div>
+      <div class="tile top c6"><h3>Не хочеш займатися бізнесом замість медицини</h3><p class="m-hide" style="margin-top:10px">Ти відповідаєш за медицину. Ми - за операційну та бізнесову частину.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="roles">
+  <div class="wrap">
+    <div class="bento">
+      <div class="tile c12">
+        <div class="rolehead">
+          <span class="eyebrow">Модель</span>
+          <h2>Зони відповідальності</h2>
+          <p class="big m-hide" style="margin:12px auto 0">Межа в договорі, а не «на словах».</p>
+        </div>
+
+        <div class="roles">
+          <div class="rolecol l">
+            <div class="rolelabel">Твоя</div>
+            <div class="item"><div class="badge"><svg class="ic"><use href="#i-tooth"/></svg></div>
+              <div><b>Лікування</b><span>Клінічні стандарти та протоколи</span></div></div>
+            <div class="item"><div class="badge"><svg class="ic"><use href="#i-users"/></svg></div>
+              <div><b>Підбір лікарів</b><span>Формування своєї команди</span></div></div>
+            <div class="item"><div class="badge"><svg class="ic"><use href="#i-shield"/></svg></div>
+              <div><b>Якість</b><span>Робота з пацієнтами</span></div></div>
+            <div class="item"><div class="badge"><svg class="ic"><use href="#i-person"/></svg></div>
+              <div><b>Своє крісло</b><span>Лікуєш сам - стільки, скільки хочеш</span></div></div>
+          </div>
+
+          <div class="rolefig"><img src="img/doctor-f.png" alt=""></div>
+
+          <div class="rolecol r">
+            <div class="rolelabel">Наша</div>
+            <div class="item"><div class="badge us"><svg class="ic"><use href="#i-wallet"/></svg></div>
+              <div><b>Гроші</b><span>Вкладаємо нарівні з тобою</span></div></div>
+            <div class="item"><div class="badge us"><svg class="ic"><use href="#i-build"/></svg></div>
+              <div><b>Приміщення й ремонт</b><span>Пошук, оренда, обладнання, лізинг</span></div></div>
+            <div class="item"><div class="badge us"><svg class="ic"><use href="#i-file"/></svg></div>
+              <div><b>Дозволи й документи</b><span>Реєстрація, кадри, бухгалтерія</span></div></div>
+            <div class="item"><div class="badge us"><svg class="ic"><use href="#i-mega"/></svg></div>
+              <div><b>Маркетинг</b><span>Потік пацієнтів та аналітика</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="benefits">
+  <div class="wrap">
+    <div class="bento">
+      <div class="tile c12" style="padding-bottom:26px">
+        <span class="eyebrow">Мережа</span>
+        <h2>Що ти отримуєш, окрім фінансування</h2>
+        <p class="big m-hide" style="margin-top:14px">Гроші - найпростіша частина. Складна - усе, що між рішенням і першим пацієнтом.</p>
+      </div>
+
+      <div class="tile top c4">
+        <h3>Легалізація</h3>
+        <p style="margin-top:12px">Podmiot leczniczy, SANEPID, дозволи, договори - ведемо всю паперову частину до відкриття.</p>
+        <p style="margin-top:12px;font-size:14px;opacity:.7">Іспит з польської та ностріфікація - на тобі.</p>
+      </div>
+
+      <div class="tile top c4">
+        <h3>Закупівлі без переплат</h3>
+        <p style="margin-top:12px">Знаємо реальні ціни на обладнання й матеріали і торгуємось за кожну позицію.</p>
+      </div>
+
+      <div class="tile top c4">
+        <h3>Приміщення й локація</h3>
+        <p style="margin-top:12px">Шукаємо не гарне приміщення, а те, де є пацієнти: потік людей, конкуренти поруч, оренда, яку клініка потягне.</p>
+      </div>
+
+      <div class="tile top navy c6">
+        <h3>Усі ключові спеціалісти вже на нашому боці</h3>
+        <p style="margin-top:10px">Бухгалтерія, кадри, маркетинг, IT, закупівлі - команда вже зібрана. Одна клініка таких людей собі не тримає.</p>
+      </div>
+
+      <div class="tile top soft c6">
+        <h3>Прозорість щомісяця</h3>
+        <p style="margin-top:10px">Виручка, завантаження, витрати, звідки прийшов пацієнт - щомісяця, без запиту.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="wrap">
+    <div class="bento" style="margin-bottom:14px">
+      <div class="tile c12" style="padding-bottom:26px">
+        <span class="eyebrow">Процес</span>
+        <h2>Від першої розмови до відкриття клініки</h2>
+      </div>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="i">01</div><b>Знайомство</b><span>30 хвилин, безкоштовно та без зобовʼязань</span></div>
+      <div class="step"><div class="i">02</div><b>Плануємо</b><span>Визначаємо місто, формат клініки, кількість крісел та бюджет</span></div>
+      <div class="step"><div class="i">03</div><b>Погоджуємо умови</b><span>Фіксуємо ролі, інвестиції та умови партнерства</span></div>
+      <div class="step"><div class="i">04</div><b>Створюємо компанію</b><span>Реєстрація, фінансування та необхідні документи</span></div>
+      <div class="step"><div class="i">05</div><b>Знаходимо приміщення</b><span>Підбираємо локацію, орендуємо та готуємо проєкт</span></div>
+      <div class="step"><div class="i">06</div><b>Робимо ремонт і закуповуємо обладнання</b><span>Організовуємо ремонт, обладнання, монтаж та все необхідне для роботи</span></div>
+      <div class="step"><div class="i">07</div><b>Оформлюємо клініку</b><span>Допомагаємо отримати необхідні дозволи та підготувати клініку до роботи</span></div>
+      <div class="step"><div class="i">08</div><b>Збираємо команду та залучаємо пацієнтів</b><span>Підбираємо персонал, запускаємо маркетинг і готуємо потік пацієнтів ще до відкриття</span></div>
+      <div class="step"><div class="i">09</div><b>Відкриваємо клініку</b><span>Клініка готова до роботи. Ти переходиш до своєї роботи</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="trust">
+  <div class="wrap">
+    <div class="bento">
+      <div class="tile navy c12">
+        <span class="eyebrow">Чому ми</span>
+        <h2 style="max-width:22ch">Нам так само важливо, <strong>щоб ти не переплачував.</strong></h2>
+        <p style="margin-top:20px;max-width:56ch;color:rgba(255,255,255,.75)">Наші гроші теж вкладені в цю клініку. Тому ми шукаємо вигідні умови, перевіряємо ціни та контролюємо витрати так, ніби це наші власні.</p>
+      </div>
+      <div class="tile c6">
+        <span class="eyebrow">Головне</span>
+        <h3>Твоя клініка будується, а ти продовжуєш працювати</h3>
+        <p style="margin-top:12px">Не потрібно звільнятися чи зупиняти практику. Переходиш у свою клініку, коли вона готова до роботи.</p>
+      </div>
+      <div class="tile soft c6">
+        <span class="eyebrow">Гроші</span>
+        <h3>Без переплат, яких ти не бачиш</h3>
+        <p style="margin-top:12px">Реальні ціни на обладнання, вигідні умови лізингу та пільгові позики. Без зайвих посередників. Бюджет залежить від міста та кількості крісел - порахуємо разом.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="bento" style="margin-bottom:14px">
+      <div class="tile c12" style="padding-bottom:26px">
+        <span class="eyebrow">Питання</span>
+        <h2>Часті питання</h2>
+      </div>
+    </div>
+    <details><summary>Чи треба звільнятись з роботи?</summary><p>Ні. Поки ми будуємо, ти працюєш як працював. Переходиш у день відкриття.</p></details>
+    <details><summary>Чи потрібне PWZ, щоб відкрити клініку?</summary><p>Щоб <strong>володіти</strong> клінікою - ні. Щоб <strong>лікувати</strong> в ній - так. Це різні речі, і вони не мусять збігатись у часі.</p></details>
+    <details><summary>Скільки часу до відкриття?</summary><p>Зазвичай 6-8 місяців від домовленості.</p></details>
+    <details><summary>Хто ухвалює рішення в клініці?</summary><p>Медицина, стандарти й підбір лікарів за тобою. Фінанси, адміністрація й розвиток за нами. Межа прописується в договорі.</p></details>
+    <details><summary>А якщо не спрацює?</summary><p>Ми ризикуємо так само, як ти. Наші гроші вкладені в цю саму клініку, і ми зацікавлені, щоб вона працювала і розвивалась далі.</p></details>
+    <details><summary>Що з моїми пацієнтами?</summary><p>Залежить від твого чинного договору. Обговорюємо на розмові.</p></details>
+  </div>
+</section>
+
+<section id="form">
+  <div class="wrap">
+    <div class="bento">
+      <div class="tile navy c12">
+        <span class="eyebrow">Заявка</span>
+        <h2 style="max-width:16ch">Залиш заявку - зателефонуємо і все розкажемо</h2>
+        <p class="big" style="margin-top:16px;color:rgba(255,255,255,.7)">П'ять коротких питань. Займе хвилину.</p>
+
+        <form id="lead" novalidate style="max-width:620px;margin-top:30px">
+          <label for="f_name">Ім'я та прізвище</label>
+          <input type="text" id="f_name" autocomplete="name" placeholder="Олександр Коваль">
+          <div class="err" id="e_name">Вкажіть ім'я</div>
+
+          <label for="f_phone">Номер телефону</label>
+          <input type="tel" id="f_phone" autocomplete="tel" placeholder="+48 000 000 000">
+          <div class="err" id="e_phone">Вкажіть номер телефону</div>
+
+          <label for="f_city">В якому місті ти зараз?</label>
+          <input type="text" id="f_city" autocomplete="address-level2" placeholder="Познань">
+          <div class="err" id="e_city">Вкажіть місто</div>
+
+          <label>Статус PWZ</label>
+          <div class="radios">
+            <label><input type="radio" name="pwz" value="Маю pełne PWZ"><span>Маю pełne PWZ</span></label>
+            <label><input type="radio" name="pwz" value="Маю warunkowe PWZ"><span>Маю warunkowe PWZ</span></label>
+            <label><input type="radio" name="pwz" value="Проходжу ностріфікацію"><span>Проходжу ностріфікацію</span></label>
+            <label><input type="radio" name="pwz" value="PWZ немає"><span>PWZ немає</span></label>
+            <label><input type="radio" name="pwz" value="Я не лікар"><span>Я не лікар</span></label>
+          </div>
+          <div class="err" id="e_pwz">Оберіть варіант</div>
+
+          <label for="f_q">Твоє запитання <span style="font-weight:500;opacity:.55">- необов'язково</span></label>
+          <textarea id="f_q" placeholder="Що цікавить найбільше?"></textarea>
+
+          <button type="submit" class="btn btn-teal" id="submit">Надіслати</button>
+          <div class="note">Передзвонимо протягом доби. Нічого не продаємо по телефону.</div>
+          <div class="note" style="margin-top:10px;opacity:.75">Надсилаючи форму, ти передаєш свої дані, щоб ми могли звʼязатись щодо відкриття клініки. Обробляємо їх згідно з <a href="/polityka/" target="_blank" style="color:var(--teal-soft)">Політикою приватності</a>.</div>
+        </form>
+
+        <div class="ok" id="ok">
+          <h2 style="color:#fff">Дякуємо, заявку отримано</h2>
+          <p class="big" style="margin-top:12px;color:rgba(255,255,255,.75)">Зателефонуємо протягом доби.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sticky"><a class="btn" href="#form">Залишити заявку</a></div>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="fbrand">
+        <img src="img/everident-logo-white.svg" alt="Everident">
+        <p>Відкриваємо стоматологічні клініки в Польщі разом з лікарями.</p>
+      </div>
+      <div class="m-hide">
+        <h4>Модель</h4>
+        <a href="#roles">Зони відповідальності</a>
+        <a href="#benefits">Що отримуєш</a>
+        <a href="#process">Як це відбувається</a>
+        <a href="#trust">Чому ми</a>
+      </div>
+      <div class="m-hide">
+        <h4>Питання</h4>
+        <a href="#pwz">Немає PWZ?</a>
+        <a href="#why">Чому досі не почав</a>
+        <a href="#faq">Часті питання</a>
+      </div>
+      <div>
+        <h4>Контакти</h4>
+        <a href="#form">Залишити заявку</a>
+        <a href="mailto:everident@gmail.com">everident@gmail.com</a>
+        <a href="/polityka/">Політика приватності</a>
+      </div>
+    </div>
+    <div class="fbot">
+      <div>© <span id="yr"></span> Everident</div>
+      <div>Перша розмова 30 хвилин. Безкоштовно, без зобовʼязань.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  document.getElementById('yr').textContent=new Date().getFullYear();
+
+  /* прогрес + активна секція */
+  var bar=document.getElementById('bar'), fill=document.getElementById('fill'),
+      pctv=document.getElementById('pctv');
+  var links=[].slice.call(document.querySelectorAll('#rail a'));
+  var targets=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
+  function onScroll(){
+    var h=document.documentElement.scrollHeight-window.innerHeight;
+    var pct=h>0?Math.min(100,Math.max(0,window.scrollY/h*100)):0;
+    bar.style.width=pct+'%';
+    if(fill) fill.style.height=pct+'%';
+    if(pctv) pctv.textContent=Math.round(pct);
+    var mid=window.scrollY+window.innerHeight*0.35, cur=0;
+    targets.forEach(function(t,i){ if(t && t.offsetTop<=mid) cur=i; });
+    links.forEach(function(a,i){ a.classList.toggle('on', i===cur); });
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('resize',onScroll);
+  onScroll();
+
+
+  /* 1. UTM у localStorage - лінк може бути відносним і мітки губляться */
+  var LS='ev_partner_src';
+  function saveSrc(){
+    var p=new URLSearchParams(location.search),got={};
+    ['utm_source','utm_medium','utm_campaign','utm_content','lang'].forEach(function(k){
+      if(p.get(k)) got[k]=p.get(k);});
+    if(!got.utm_source){
+      if(p.get('fbclid')) got.utm_source='facebook';
+      else if(p.get('gclid')) got.utm_source='google';}
+    if(Object.keys(got).length){try{localStorage.setItem(LS,JSON.stringify(got));}catch(e){}return got;}
+    try{return JSON.parse(localStorage.getItem(LS)||'{}');}catch(e){return {};}
+  }
+  var SRC=saveSrc();
+  function sourceLabel(){
+    if(!SRC.utm_source){
+      if(document.referrer&&document.referrer.indexOf(location.hostname)===-1){
+        try{return new URL(document.referrer).hostname;}catch(e){return 'referral';}}
+      return 'direct';}
+    var s=SRC.utm_source+(SRC.utm_medium?' / '+SRC.utm_medium:'');
+    if(SRC.utm_campaign)s+=' · '+SRC.utm_campaign;
+    if(SRC.utm_content)s+=' · '+SRC.utm_content;
+    return s;
+  }
+
+  /* 2. Підміна H1 під креатив */
+  var H1={
+    money:'Своя клініка коштує <em>вдвічі менше</em>, ніж ти думаєш',
+    alone:'Відкрити клініку не складно. Складно - <em>одному</em>',
+    pwz:'Щоб володіти клінікою, <em>PWZ не потрібне</em>',
+    docs:'У SANEPID підемо ми. <em>Твоє - крісло</em>',
+    income:'Та сама робота. <em>Тільки на себе</em>'
+  };
+  var key=(new URLSearchParams(location.search).get('utm_content')||'').toLowerCase();
+  Object.keys(H1).forEach(function(k){
+    if(key.indexOf(k)!==-1)document.getElementById('h1').innerHTML=H1[k];});
+
+  /* 3. POST у Google Form. Усі поля там НЕобов'язкові:
+        порожнє обов'язкове мовчки відхиляє ВСЮ заявку. Валідація тут. */
+  var ACTION='https://docs.google.com/forms/d/e/1FAIpQLSesikXkIv3Kl4gfD_BkgpYMx5gLlZcwsjRFdM9oKVbaGPK5kA/formResponse';
+  var E={name:'entry.1320096200',phone:'entry.1132582372',city:'entry.1747793796',
+         pwz:'entry.1873910576',q:'entry.984965845',src:'entry.1781395167',lang:'entry.2045558235'};
+  var form=document.getElementById('lead');
+  function show(id,on){document.getElementById(id).style.display=on?'block':'none';}
+  function val(id){return document.getElementById(id).value.trim();}
+
+  form.addEventListener('submit',function(ev){
+    ev.preventDefault();
+    var pwz=document.querySelector('input[name=pwz]:checked'),ok=true;
+    ['e_name','e_phone','e_city','e_pwz'].forEach(function(i){show(i,false);});
+    if(!val('f_name')){show('e_name',true);ok=false;}
+    if(val('f_phone').replace(/\D/g,'').length<9){show('e_phone',true);ok=false;}
+    if(!val('f_city')){show('e_city',true);ok=false;}
+    if(!pwz){show('e_pwz',true);ok=false;}
+    if(!ok)return;
+
+    var fd=new FormData();
+    fd.append(E.name,val('f_name'));fd.append(E.phone,val('f_phone'));
+    fd.append(E.city,val('f_city'));fd.append(E.pwz,pwz.value);
+    fd.append(E.q,val('f_q'));fd.append(E.src,sourceLabel());
+    fd.append(E.lang,document.documentElement.lang==='ru'?'ru':'ua');
+
+    var btn=document.getElementById('submit');
+    btn.disabled=true;btn.textContent='Надсилаємо…';
+    fetch(ACTION,{method:'POST',mode:'no-cors',body:fd}).catch(function(){}).then(function(){
+      form.style.display='none';
+      var o=document.getElementById('ok');o.style.display='block';
+      o.scrollIntoView({block:'center'});});
+  });
+})();
+</script>
+</body>
+</html>
