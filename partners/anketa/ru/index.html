@@ -24,6 +24,14 @@ header{width:100%;max-width:720px;background:rgba(255,255,255,.78);
   display:flex;align-items:center;justify-content:space-between;gap:10px;
   height:60px;padding:0 16px;flex:0 0 auto}
 header img{height:28px;display:block}
+.hdr-left{display:flex;align-items:center;gap:10px;min-width:0}
+.homebtn{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:700;
+  color:var(--muted);text-decoration:none;background:var(--field);padding:8px 13px;
+  border-radius:999px;white-space:nowrap;transition:background .14s,color .14s}
+.homebtn:hover{background:var(--field-2);color:var(--navy)}
+.homebtn svg{width:14px;height:14px;flex:0 0 auto;fill:none;stroke:currentColor;
+  stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:360px){.homebtn{font-size:12.5px;padding:7px 11px}header{padding:0 12px}}
 .langsw{display:flex;align-items:center;gap:8px}
 .langsw a{display:block;line-height:0;opacity:.45;transition:opacity .15s ease,transform .15s ease}
 .langsw a:hover{opacity:.8}
@@ -106,7 +114,10 @@ src="https://www.facebook.com/tr?id=2244023079681248&ev=PageView&noscript=1"
 <body>
 
 <header>
-  <a href="../../ru/"><img src="../../img/everident-logo.svg" alt="Everident"></a>
+  <div class="hdr-left">
+    <a href="../../ru/"><img src="../../img/everident-logo.svg" alt="Everident"></a>
+    <a class="homebtn" href="../../ru/"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5"/></svg><span>Главная</span></a>
+  </div>
   <div class="langsw" role="group" aria-label="Язык">
     <a href="../" title="Украинский" aria-label="Украинский"><svg viewBox="0 0 9 6" aria-hidden="true"><rect width="9" height="3" fill="#0057b7"/><rect y="3" width="9" height="3" fill="#ffd700"/></svg></a>
     <a href="./" class="on" title="Белорусский / русский" aria-label="Белорусский / русский"><svg viewBox="0 0 9 6" aria-hidden="true"><rect width="9" height="6" fill="#fff"/><rect y="2" width="9" height="2" fill="#d22730"/></svg></a>
@@ -176,7 +187,6 @@ src="https://www.facebook.com/tr?id=2244023079681248&ev=PageView&noscript=1"
   </div>
 </main>
 
-<a class="backlink" href="../../ru/">Назад на сайт</a>
 
 <script>
 (function(){
