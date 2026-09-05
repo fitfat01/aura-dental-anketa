@@ -76,6 +76,7 @@ header img{height:30px;display:block}
 .hdr-cta{color:#fff;text-decoration:none;font-weight:800;font-size:14.5px;
   background:var(--navy);padding:13px 24px;border-radius:999px;white-space:nowrap;transition:.14s}
 .hdr-cta:hover{background:var(--navy-ink)}
+.cta-sm{display:none}
 
 /* перемикач мови: прапорці як на рекрутинговій сторінці */
 .langsw{display:flex;align-items:center;gap:8px}
@@ -252,7 +253,9 @@ section{padding:52px 0}
   .tile-hero.withfig{grid-template-columns:1fr;padding-bottom:clamp(26px,3.2vw,44px)}
   .figwrap{display:none}
   .hdr-nav{display:none}
-  .hdr-cta{display:none}
+  .hdr-cta{padding:11px 18px;font-size:14px}
+  .cta-lg{display:none}
+  .cta-sm{display:inline}
   header .wrap{height:56px;padding:0 14px}
   header img{height:26px}
   body{padding-top:78px}
@@ -352,7 +355,7 @@ src="https://www.facebook.com/tr?id=2244023079681248&ev=PageView&noscript=1"
       <a href="../" title="Украинский" aria-label="Украинский"><svg viewBox="0 0 9 6" aria-hidden="true"><rect width="9" height="3" fill="#0057b7"/><rect y="3" width="9" height="3" fill="#ffd700"/></svg></a>
       <a href="./" class="on" title="Белорусский / русский" aria-label="Белорусский / русский"><svg viewBox="0 0 9 6" aria-hidden="true"><rect width="9" height="6" fill="#fff"/><rect y="2" width="9" height="2" fill="#d22730"/></svg></a>
     </div>
-    <a class="hdr-cta" href="../anketa/ru/">Оставить заявку</a>
+    <a class="hdr-cta" href="../anketa/ru/"><span class="cta-lg">Оставить заявку</span><span class="cta-sm">Анкета</span></a>
     </div>
   </div>
 </header>
