@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Анкета партнера - Everident</title>
+<meta name="description" content="П'ять коротких питань. Відкриваємо стоматологічні клініки в Польщі разом з лікарями.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#03105B;--navy-ink:#000B58;--teal:#26C6DA;--teal-soft:#5CE9FE;
+  --field:#DCEEF4;--field-2:#C9E6EF;--muted:#4B5563}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Manrope,system-ui,-apple-system,sans-serif;background:var(--field);color:var(--navy);
+  line-height:1.4;-webkit-font-smoothing:antialiased;min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;padding:14px 14px 30px}
+
+header{width:100%;max-width:720px;background:rgba(255,255,255,.78);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.6);border-radius:999px;
+  box-shadow:0 10px 30px -12px rgba(3,16,91,.2);
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  height:60px;padding:0 16px;flex:0 0 auto}
+header img{height:28px;display:block}
+.langsw{display:flex;align-items:center;gap:8px}
+.langsw a{display:block;line-height:0;opacity:.45;transition:opacity .15s ease,transform .15s ease}
+.langsw a:hover{opacity:.8}
+.langsw a.on{opacity:1;transform:scale(1.06)}
+.langsw svg{display:block;width:26px;height:18px;border-radius:3px;box-shadow:0 0 0 1px rgba(3,16,91,.14)}
+
+.card{width:100%;max-width:720px;background:#fff;border-radius:30px;
+  padding:clamp(24px,4vw,44px);margin-top:22px;box-shadow:0 26px 60px -30px rgba(3,16,91,.3)}
+.eyebrow{display:inline-block;font-size:11.5px;font-weight:800;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+h1{font-size:clamp(25px,3.6vw,34px);font-weight:800;letter-spacing:-.04em;line-height:1.05}
+.sub{color:var(--muted);font-size:15.5px;font-weight:500;margin-top:10px;line-height:1.5}
+
+.qbar{height:5px;background:rgba(3,16,91,.1);border-radius:5px;overflow:hidden;margin-top:26px}
+.qbar-fill{height:100%;width:0;background:var(--teal);border-radius:5px;transition:width .28s ease}
+.qcount{font-size:13px;font-weight:700;color:var(--muted);margin:11px 0 22px;
+  font-variant-numeric:tabular-nums}
+
+.qstep{display:none}
+.qstep.on{display:block;animation:qin .26s cubic-bezier(.16,1,.3,1)}
+@keyframes qin{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.qq{font-size:clamp(20px,2.6vw,26px);font-weight:800;letter-spacing:-.03em;line-height:1.18}
+.qhint{font-size:13.5px;color:var(--muted);margin-top:8px;font-weight:500}
+
+input[type=text],input[type=tel],textarea{width:100%;font-family:inherit;font-size:16px;
+  font-weight:600;padding:16px 18px;border:2px solid rgba(3,16,91,.12);border-radius:14px;
+  background:#fff;color:var(--navy);margin-top:18px}
+input::placeholder,textarea::placeholder{color:rgba(3,16,91,.32);font-weight:500}
+textarea{min-height:110px;resize:vertical}
+input:focus,textarea:focus{outline:0;border-color:var(--teal)}
+
+.radios{display:grid;gap:9px;margin-top:18px}
+.radios label{display:flex;align-items:center;gap:12px;font-weight:700;font-size:16px;
+  background:var(--field);border-radius:15px;padding:15px 18px;cursor:pointer;
+  border:2px solid transparent;transition:.14s}
+.radios label:hover{border-color:rgba(38,198,218,.55)}
+.radios label:has(input:checked){background:var(--teal);border-color:var(--teal)}
+.radios input{accent-color:var(--navy);width:19px;height:19px;flex:0 0 auto}
+
+.err{color:#BA1A1A;font-size:13px;font-weight:700;margin-top:9px;display:none}
+
+.qnav{display:flex;align-items:center;gap:12px;margin-top:28px}
+.btn{display:inline-flex;align-items:center;justify-content:center;background:var(--navy);
+  color:#fff;font-weight:800;font-size:16px;padding:16px 30px;border-radius:999px;
+  text-decoration:none;border:0;cursor:pointer;font-family:inherit;transition:.14s;flex:1}
+.btn:hover{background:var(--navy-ink)}
+.btn:disabled{opacity:.6;cursor:default}
+.qback{background:none;border:0;color:var(--muted);font-family:inherit;font-weight:700;
+  font-size:15px;cursor:pointer;padding:12px 2px;flex:0 0 auto;transition:color .14s}
+.qback:hover{color:var(--navy)}
+
+.note{font-size:12.5px;color:var(--muted);margin-top:16px;font-weight:500;line-height:1.5}
+.note a{color:var(--navy)}
+.ok{display:none;text-align:center;padding:26px 4px 6px}
+.ok h2{font-size:clamp(23px,3vw,30px);font-weight:800;letter-spacing:-.03em}
+.ok p{color:var(--muted);font-size:16px;font-weight:500;margin-top:10px}
+.ok a{display:inline-block;margin-top:24px}
+.backlink{display:inline-block;margin-top:20px;font-size:14px;font-weight:700;
+  color:var(--muted);text-decoration:none}
+.backlink:hover{color:var(--navy)}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="../"><img src="../img/everident-logo.svg" alt="Everident"></a>
+  <div class="langsw" role="group" aria-label="Мова">
+    <a href="./" class="on" title="Українська" aria-label="Українська"><svg viewBox="0 0 9 6" aria-hidden="true"><rect width="9" height="3" fill="#0057b7"/><rect y="3" width="9" height="3" fill="#ffd700"/></svg></a>
+    <a href="ru/" title="Білоруська / російська" aria-label="Білоруська / російська"><svg viewBox="0 0 9 6" aria-hidden="true"><rect width="9" height="6" fill="#fff"/><rect y="2" width="9" height="2" fill="#d22730"/></svg></a>
+  </div>
+</header>
+
+<main class="card">
+  <div id="head">
+    <span class="eyebrow">Everident</span>
+    <h1>Анкета партнера</h1>
+    <p class="sub">П'ять коротких питань. Одне за раз - займе хвилину.</p>
+  </div>
+
+  <form id="lead" novalidate>
+    <div class="qbar"><div class="qbar-fill" id="qfill"></div></div>
+    <div class="qcount"><span id="qnow">1</span> / <span id="qtotal">5</span></div>
+
+    <div class="qstep" data-v="pwz">
+      <div class="qq">Який у тебе статус PWZ?</div>
+      <div class="radios">
+        <label><input type="radio" name="pwz" value="Маю pełne PWZ"><span>Маю pełne PWZ</span></label>
+        <label><input type="radio" name="pwz" value="Маю warunkowe PWZ"><span>Маю warunkowe PWZ</span></label>
+        <label><input type="radio" name="pwz" value="Проходжу ностріфікацію"><span>Проходжу ностріфікацію</span></label>
+        <label><input type="radio" name="pwz" value="PWZ немає"><span>PWZ немає</span></label>
+        <label><input type="radio" name="pwz" value="Я не лікар"><span>Я не лікар</span></label>
+      </div>
+      <div class="err" id="e_pwz">Оберіть варіант</div>
+    </div>
+
+    <div class="qstep" data-v="city">
+      <div class="qq">В якому місті ти зараз?</div>
+      <input type="text" id="f_city" autocomplete="address-level2" placeholder="Познань">
+      <div class="err" id="e_city">Вкажіть місто</div>
+    </div>
+
+    <div class="qstep" data-v="name">
+      <div class="qq">Як до тебе звертатись?</div>
+      <input type="text" id="f_name" autocomplete="name" placeholder="Олександр Коваль">
+      <div class="err" id="e_name">Вкажіть імʼя</div>
+    </div>
+
+    <div class="qstep" data-v="phone">
+      <div class="qq">Номер телефону</div>
+      <input type="tel" id="f_phone" autocomplete="tel" placeholder="+48 000 000 000">
+      <div class="err" id="e_phone">Вкажіть номер телефону</div>
+    </div>
+
+    <div class="qstep" data-v="q">
+      <div class="qq">Що цікавить найбільше?</div>
+      <div class="qhint">Необовʼязково - можна пропустити</div>
+      <textarea id="f_q" placeholder="Напиши кількома словами"></textarea>
+    </div>
+
+    <div class="qnav">
+      <button type="button" class="qback" id="qback">Назад</button>
+      <button type="button" class="btn" id="qnext">Далі</button>
+      <button type="submit" class="btn" id="submit" style="display:none">Надіслати</button>
+    </div>
+    <div class="note">Передзвонимо протягом доби. Нічого не продаємо по телефону.</div>
+    <div class="note" style="opacity:.8">Надсилаючи форму, ти передаєш свої дані, щоб ми могли звʼязатись щодо відкриття клініки. Обробляємо їх згідно з <a href="/polityka/" target="_blank">Політикою приватності</a>.</div>
+  </form>
+
+  <div class="ok" id="ok">
+    <h2>Дякуємо, заявку отримано</h2>
+    <p>Зателефонуємо протягом доби.</p>
+    <a class="btn" href="../" style="flex:0 0 auto">Повернутись на сайт</a>
+  </div>
+</main>
+
+<a class="backlink" href="../">Назад на сайт</a>
+
+<script>
+(function(){
+  /* UTM: посилання з лендинга відносне, мітки лишились у localStorage того самого домену */
+  var LS='ev_partner_src';
+  function saveSrc(){
+    var p=new URLSearchParams(location.search),got={};
+    ['utm_source','utm_medium','utm_campaign','utm_content','lang'].forEach(function(k){
+      if(p.get(k)) got[k]=p.get(k);});
+    if(!got.utm_source){
+      if(p.get('fbclid')) got.utm_source='facebook';
+      else if(p.get('gclid')) got.utm_source='google';}
+    if(Object.keys(got).length){try{localStorage.setItem(LS,JSON.stringify(got));}catch(e){}return got;}
+    try{return JSON.parse(localStorage.getItem(LS)||'{}');}catch(e){return {};}
+  }
+  var SRC=saveSrc();
+  function pageLabel(){
+    return document.documentElement.lang==='ru' ? 'Partner RU' : 'Partner UA';
+  }
+  function sourceLabel(){
+    if(!SRC.utm_source) return pageLabel();
+    var s=SRC.utm_source+(SRC.utm_medium?' / '+SRC.utm_medium:'');
+    if(SRC.utm_campaign)s+=' · '+SRC.utm_campaign;
+    if(SRC.utm_content)s+=' · '+SRC.utm_content;
+    return s;
+  }
+
+  var ACTION='https://docs.google.com/forms/d/e/1FAIpQLSesikXkIv3Kl4gfD_BkgpYMx5gLlZcwsjRFdM9oKVbaGPK5kA/formResponse';
+  var E={name:'entry.1320096200',phone:'entry.1132582372',city:'entry.1747793796',
+         pwz:'entry.1873910576',q:'entry.984965845',src:'entry.1781395167',lang:'entry.2045558235'};
+  var form=document.getElementById('lead');
+  var SENDING='Надсилаємо…';
+  function show(id,on){document.getElementById(id).style.display=on?'block':'none';}
+  function val(id){return document.getElementById(id).value.trim();}
+
+  var STEPS=[].slice.call(form.querySelectorAll('.qstep'));
+  var cur=0, qnext=document.getElementById('qnext'), qback=document.getElementById('qback'),
+      qfill=document.getElementById('qfill'), qnow=document.getElementById('qnow'),
+      sendBtn=document.getElementById('submit');
+  document.getElementById('qtotal').textContent=STEPS.length;
+
+  function okStep(i){
+    var v=STEPS[i].getAttribute('data-v');
+    if(v==='pwz')   return !!document.querySelector('input[name=pwz]:checked');
+    if(v==='city')  return !!val('f_city');
+    if(v==='name')  return !!val('f_name');
+    if(v==='phone') return val('f_phone').replace(/\D/g,'').length>=9;
+    return true;
+  }
+  function errOf(i){
+    return {pwz:'e_pwz',city:'e_city',name:'e_name',phone:'e_phone'}[STEPS[i].getAttribute('data-v')];
+  }
+  function paint(){
+    STEPS.forEach(function(s,i){s.classList.toggle('on',i===cur);});
+    qnow.textContent=cur+1;
+    qfill.style.width=Math.round((cur+1)/STEPS.length*100)+'%';
+    qback.style.visibility=cur?'visible':'hidden';
+    var last=cur===STEPS.length-1;
+    qnext.style.display=last?'none':'';
+    sendBtn.style.display=last?'':'none';
+    var inp=STEPS[cur].querySelector('input[type=text],input[type=tel],textarea');
+    if(inp) setTimeout(function(){try{inp.focus({preventScroll:true});}catch(e){inp.focus();}},60);
+  }
+  function go(d){
+    if(d>0){
+      var e=errOf(cur);
+      if(!okStep(cur)){ if(e) show(e,true); return; }
+      if(e) show(e,false);
+    }
+    cur=Math.max(0,Math.min(STEPS.length-1,cur+d));
+    paint();
+  }
+  qnext.addEventListener('click',function(){go(1);});
+  qback.addEventListener('click',function(){go(-1);});
+  form.addEventListener('keydown',function(e){
+    if(e.key==='Enter'&&e.target.tagName!=='TEXTAREA'){e.preventDefault();go(1);}
+  });
+  [].slice.call(form.querySelectorAll('input[name=pwz]')).forEach(function(r){
+    r.addEventListener('change',function(){show('e_pwz',false);setTimeout(function(){go(1);},200);});
+  });
+  paint();
+
+  form.addEventListener('submit',function(ev){
+    ev.preventDefault();
+    for(var i=0;i<STEPS.length;i++){
+      if(!okStep(i)){ cur=i; paint(); var e=errOf(i); if(e) show(e,true); return; }
+    }
+    var pwz=document.querySelector('input[name=pwz]:checked');
+    var fd=new FormData();
+    fd.append(E.name,val('f_name'));fd.append(E.phone,val('f_phone'));
+    fd.append(E.city,val('f_city'));fd.append(E.pwz,pwz.value);
+    fd.append(E.q,val('f_q'));fd.append(E.src,sourceLabel());
+    fd.append(E.lang,document.documentElement.lang==='ru'?'ru':'ua');
+
+    sendBtn.disabled=true;sendBtn.textContent=SENDING;
+    fetch(ACTION,{method:'POST',mode:'no-cors',body:fd}).catch(function(){}).then(function(){
+      form.style.display='none';
+      document.getElementById('head').style.display='none';
+      document.getElementById('ok').style.display='block';
+      window.scrollTo(0,0);});
+  });
+})();
+</script>
+</body>
+</html>
