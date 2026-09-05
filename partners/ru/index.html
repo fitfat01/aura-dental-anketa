@@ -66,6 +66,13 @@ header img{height:28px;display:block}
   background:#fff;padding:11px 22px;border-radius:999px;white-space:nowrap}
 .hdr-cta:hover{background:var(--teal-soft)}
 
+/* перемикач мови: прапорці як на рекрутинговій сторінці */
+.langsw{display:flex;align-items:center;gap:8px}
+.langsw a{display:block;line-height:0;opacity:.45;transition:opacity .15s ease,transform .15s ease}
+.langsw a:hover{opacity:.8}
+.langsw a.on{opacity:1;transform:scale(1.06)}
+.langsw svg{display:block;width:26px;height:18px;border-radius:3px;box-shadow:0 0 0 1px rgba(3,16,91,.14)}
+
 /* hero */
 .hero{padding:6px 0 14px}
 .hero h1{font-size:clamp(32px,4.4vw,54px)}
@@ -301,6 +308,10 @@ section{padding:52px 0}
 <header>
   <div class="wrap">
     <img src="../img/everident-logo.svg" alt="Everident">
+    <div class="langsw" role="group" aria-label="Язык">
+      <a href="../" title="Украинский" aria-label="Украинский"><svg viewBox="0 0 9 6" aria-hidden="true"><rect width="9" height="3" fill="#0057b7"/><rect y="3" width="9" height="3" fill="#ffd700"/></svg></a>
+      <a href="./" class="on" title="Белорусский / русский" aria-label="Белорусский / русский"><svg viewBox="0 0 9 6" aria-hidden="true"><rect width="9" height="6" fill="#fff"/><rect y="2" width="9" height="2" fill="#d22730"/></svg></a>
+    </div>
     <a class="hdr-cta" href="#form">Оставить заявку</a>
   </div>
 </header>
@@ -658,11 +669,16 @@ section{padding:52px 0}
     try{return JSON.parse(localStorage.getItem(LS)||'{}');}catch(e){return {};}
   }
   var SRC=saveSrc();
+  /* Мітка сторінки, яку відкрила людина - UA чи RU. Замість беззмістовної мітки прямого заходу. */
+  function pageLabel(){
+    return document.documentElement.lang==='ru' ? 'Partner RU' : 'Partner UA';
+  }
   function sourceLabel(){
     if(!SRC.utm_source){
       if(document.referrer&&document.referrer.indexOf(location.hostname)===-1){
-        try{return new URL(document.referrer).hostname;}catch(e){return 'referral';}}
-      return 'direct';}
+        try{return pageLabel()+' · '+new URL(document.referrer).hostname;}
+        catch(e){return pageLabel();}}
+      return pageLabel();}
     var s=SRC.utm_source+(SRC.utm_medium?' / '+SRC.utm_medium:'');
     if(SRC.utm_campaign)s+=' · '+SRC.utm_campaign;
     if(SRC.utm_content)s+=' · '+SRC.utm_content;
