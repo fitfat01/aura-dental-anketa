@@ -225,6 +225,24 @@ form .btn{width:100%;margin-top:20px}
 .note{font-size:12.5px;color:rgba(255,255,255,.5);margin-top:13px;text-align:center;font-weight:500}
 .ok{display:none;text-align:center;padding:40px 10px}
 
+/* ---- покрокова анкета ---- */
+.qbar{height:4px;background:rgba(255,255,255,.14);border-radius:4px;overflow:hidden}
+.qbar-fill{height:100%;width:0;background:var(--teal);border-radius:4px;transition:width .25s ease}
+.qcount{font-size:13px;font-weight:700;letter-spacing:.04em;
+  color:rgba(255,255,255,.5);margin:12px 0 20px}
+.qstep{display:none}
+.qstep.on{display:block;animation:qin .22s ease}
+@keyframes qin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.qq{font-size:clamp(21px,2.6vw,28px);font-weight:800;color:#fff;letter-spacing:-.03em;line-height:1.15}
+.qhint{font-size:13.5px;color:rgba(255,255,255,.55);margin-top:8px;font-weight:500}
+.qstep input[type=text],.qstep input[type=tel],.qstep textarea{margin-top:18px}
+.qstep .radios{margin-top:18px}
+.qnav{display:flex;align-items:center;gap:12px;margin-top:26px}
+.qnav .btn{flex:1;width:auto;margin-top:0}
+.qback{background:none;border:0;color:rgba(255,255,255,.55);font-family:inherit;font-weight:700;
+  font-size:15px;cursor:pointer;padding:12px 2px;flex:0 0 auto;transition:color .14s}
+.qback:hover{color:#fff}
+
 /* нижня панель заявки - видима на всіх ширинах */
 .sticky{position:fixed;left:0;right:0;bottom:0;z-index:70;padding:11px 16px;
   background:rgba(220,238,244,.95);backdrop-filter:blur(10px);
@@ -573,36 +591,54 @@ section{padding:52px 0}
         <div id="formhead">
         <span class="eyebrow">Заявка</span>
         <h2 style="max-width:16ch">Залиш заявку - зателефонуємо і все розкажемо</h2>
-        <p class="big" style="margin-top:16px;color:rgba(255,255,255,.7)">П'ять коротких питань. Займе хвилину.</p>
+        <p class="big" style="margin-top:16px;color:rgba(255,255,255,.7)">П'ять коротких питань. Одне за раз - займе хвилину.</p>
         </div>
 
         <form id="lead" novalidate style="max-width:620px;margin-top:30px">
-          <label for="f_name">Ім'я та прізвище</label>
-          <input type="text" id="f_name" autocomplete="name" placeholder="Олександр Коваль">
-          <div class="err" id="e_name">Вкажіть ім'я</div>
+          <div class="qbar"><div class="qbar-fill" id="qfill"></div></div>
+          <div class="qcount">Крок <span id="qnow">1</span> з <span id="qtotal">5</span></div>
 
-          <label for="f_phone">Номер телефону</label>
-          <input type="tel" id="f_phone" autocomplete="tel" placeholder="+48 000 000 000">
-          <div class="err" id="e_phone">Вкажіть номер телефону</div>
-
-          <label for="f_city">В якому місті ти зараз?</label>
-          <input type="text" id="f_city" autocomplete="address-level2" placeholder="Познань">
-          <div class="err" id="e_city">Вкажіть місто</div>
-
-          <label>Статус PWZ</label>
-          <div class="radios">
+          <div class="qstep" data-v="pwz">
+            <div class="qq">Який у тебе статус PWZ?</div>
+            <div class="radios">
             <label><input type="radio" name="pwz" value="Маю pełne PWZ"><span>Маю pełne PWZ</span></label>
             <label><input type="radio" name="pwz" value="Маю warunkowe PWZ"><span>Маю warunkowe PWZ</span></label>
             <label><input type="radio" name="pwz" value="Проходжу ностріфікацію"><span>Проходжу ностріфікацію</span></label>
             <label><input type="radio" name="pwz" value="PWZ немає"><span>PWZ немає</span></label>
             <label><input type="radio" name="pwz" value="Я не лікар"><span>Я не лікар</span></label>
+            </div>
+            <div class="err" id="e_pwz">Оберіть варіант</div>
           </div>
-          <div class="err" id="e_pwz">Оберіть варіант</div>
 
-          <label for="f_q">Твоє запитання <span style="font-weight:500;opacity:.55">- необов'язково</span></label>
-          <textarea id="f_q" placeholder="Що цікавить найбільше?"></textarea>
+          <div class="qstep" data-v="city">
+            <div class="qq">В якому місті ти зараз?</div>
+            <input type="text" id="f_city" autocomplete="address-level2" placeholder="Познань">
+            <div class="err" id="e_city">Вкажіть місто</div>
+          </div>
 
-          <button type="submit" class="btn btn-teal" id="submit">Надіслати</button>
+          <div class="qstep" data-v="name">
+            <div class="qq">Як до тебе звертатись?</div>
+            <input type="text" id="f_name" autocomplete="name" placeholder="Олександр Коваль">
+            <div class="err" id="e_name">Вкажіть імʼя</div>
+          </div>
+
+          <div class="qstep" data-v="phone">
+            <div class="qq">Номер телефону</div>
+            <input type="tel" id="f_phone" autocomplete="tel" placeholder="+48 000 000 000">
+            <div class="err" id="e_phone">Вкажіть номер телефону</div>
+          </div>
+
+          <div class="qstep" data-v="q">
+            <div class="qq">Що цікавить найбільше?</div>
+            <div class="qhint">Необовʼязково - можна пропустити</div>
+            <textarea id="f_q" placeholder="Напиши кількома словами"></textarea>
+          </div>
+
+          <div class="qnav">
+            <button type="button" class="qback" id="qback">Назад</button>
+            <button type="button" class="btn btn-teal" id="qnext">Далі</button>
+            <button type="submit" class="btn btn-teal" id="submit" style="display:none">Надіслати</button>
+          </div>
           <div class="note">Передзвонимо протягом доби. Нічого не продаємо по телефону.</div>
           <div class="note" style="margin-top:10px;opacity:.75">Надсилаючи форму, ти передаєш свої дані, щоб ми могли звʼязатись щодо відкриття клініки. Обробляємо їх згідно з <a href="/polityka/" target="_blank" style="color:var(--teal-soft)">Політикою приватності</a>.</div>
         </form>
@@ -722,18 +758,66 @@ section{padding:52px 0}
   var E={name:'entry.1320096200',phone:'entry.1132582372',city:'entry.1747793796',
          pwz:'entry.1873910576',q:'entry.984965845',src:'entry.1781395167',lang:'entry.2045558235'};
   var form=document.getElementById('lead');
+  var SENDING='Надсилаємо…';
   function show(id,on){document.getElementById(id).style.display=on?'block':'none';}
   function val(id){return document.getElementById(id).value.trim();}
 
+  /* 4. Покрокова анкета: одне питання на екран */
+  var STEPS=[].slice.call(form.querySelectorAll('.qstep'));
+  var cur=0, qnext=document.getElementById('qnext'), qback=document.getElementById('qback'),
+      qfill=document.getElementById('qfill'), qnow=document.getElementById('qnow'),
+      sendBtn=document.getElementById('submit');
+  document.getElementById('qtotal').textContent=STEPS.length;
+
+  function okStep(i){
+    var v=STEPS[i].getAttribute('data-v');
+    if(v==='pwz')   return !!document.querySelector('input[name=pwz]:checked');
+    if(v==='city')  return !!val('f_city');
+    if(v==='name')  return !!val('f_name');
+    if(v==='phone') return val('f_phone').replace(/\D/g,'').length>=9;
+    return true;
+  }
+  function errOf(i){
+    var v=STEPS[i].getAttribute('data-v');
+    return {pwz:'e_pwz',city:'e_city',name:'e_name',phone:'e_phone'}[v];
+  }
+  function paint(){
+    STEPS.forEach(function(s,i){s.classList.toggle('on',i===cur);});
+    qnow.textContent=cur+1;
+    qfill.style.width=Math.round((cur+1)/STEPS.length*100)+'%';
+    qback.style.visibility=cur?'visible':'hidden';
+    var last=cur===STEPS.length-1;
+    qnext.style.display=last?'none':'';
+    sendBtn.style.display=last?'':'none';
+    var inp=STEPS[cur].querySelector('input[type=text],input[type=tel],textarea');
+    if(inp) setTimeout(function(){try{inp.focus({preventScroll:true});}catch(e){inp.focus();}},60);
+  }
+  function go(d){
+    if(d>0){
+      var e=errOf(cur);
+      if(!okStep(cur)){ if(e) show(e,true); return; }
+      if(e) show(e,false);
+    }
+    cur=Math.max(0,Math.min(STEPS.length-1,cur+d));
+    paint();
+  }
+  qnext.addEventListener('click',function(){go(1);});
+  qback.addEventListener('click',function(){go(-1);});
+  form.addEventListener('keydown',function(e){
+    if(e.key==='Enter'&&e.target.tagName!=='TEXTAREA'){e.preventDefault();go(1);}
+  });
+  /* відповів на радіо - одразу наступне питання */
+  [].slice.call(form.querySelectorAll('input[name=pwz]')).forEach(function(r){
+    r.addEventListener('change',function(){show('e_pwz',false);setTimeout(function(){go(1);},200);});
+  });
+  paint();
+
   form.addEventListener('submit',function(ev){
     ev.preventDefault();
-    var pwz=document.querySelector('input[name=pwz]:checked'),ok=true;
-    ['e_name','e_phone','e_city','e_pwz'].forEach(function(i){show(i,false);});
-    if(!val('f_name')){show('e_name',true);ok=false;}
-    if(val('f_phone').replace(/\D/g,'').length<9){show('e_phone',true);ok=false;}
-    if(!val('f_city')){show('e_city',true);ok=false;}
-    if(!pwz){show('e_pwz',true);ok=false;}
-    if(!ok)return;
+    for(var i=0;i<STEPS.length;i++){
+      if(!okStep(i)){ cur=i; paint(); var e=errOf(i); if(e) show(e,true); return; }
+    }
+    var pwz=document.querySelector('input[name=pwz]:checked');
 
     var fd=new FormData();
     fd.append(E.name,val('f_name'));fd.append(E.phone,val('f_phone'));
@@ -741,12 +825,11 @@ section{padding:52px 0}
     fd.append(E.q,val('f_q'));fd.append(E.src,sourceLabel());
     fd.append(E.lang,document.documentElement.lang==='ru'?'ru':'ua');
 
-    var btn=document.getElementById('submit');
-    btn.disabled=true;btn.textContent='Надсилаємо…';
+    sendBtn.disabled=true;sendBtn.textContent=SENDING;
     fetch(ACTION,{method:'POST',mode:'no-cors',body:fd}).catch(function(){}).then(function(){
       form.style.display='none';
       var fh=document.getElementById('formhead');
-      if(fh) fh.style.display='none';   /* інакше "Залиш заявку" висить над "Дякуємо" */
+      if(fh) fh.style.display='none';
       var o=document.getElementById('ok');o.style.display='block';
       o.scrollIntoView({block:'center'});});
   });
