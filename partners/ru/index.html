@@ -536,9 +536,11 @@ section{padding:52px 0}
   <div class="wrap">
     <div class="bento">
       <div class="tile navy c12">
+        <div id="formhead">
         <span class="eyebrow">Заявка</span>
         <h2 style="max-width:16ch">Оставь заявку - позвоним и всё расскажем</h2>
         <p class="big" style="margin-top:16px;color:rgba(255,255,255,.7)">Пять коротких вопросов. Займёт минуту.</p>
+        </div>
 
         <form id="lead" novalidate style="max-width:620px;margin-top:30px">
           <label for="f_name">Имя и фамилия</label>
@@ -708,6 +710,8 @@ section{padding:52px 0}
     btn.disabled=true;btn.textContent='Отправляем…';
     fetch(ACTION,{method:'POST',mode:'no-cors',body:fd}).catch(function(){}).then(function(){
       form.style.display='none';
+      var fh=document.getElementById('formhead');
+      if(fh) fh.style.display='none';   /* інакше "Залиш заявку" висить над "Дякуємо" */
       var o=document.getElementById('ok');o.style.display='block';
       o.scrollIntoView({block:'center'});});
   });
