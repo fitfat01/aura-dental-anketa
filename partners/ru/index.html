@@ -22,7 +22,9 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:Manrope,system-ui,-apple-system,sans-serif;background:var(--field);
-  color:var(--navy);line-height:1.4;-webkit-font-smoothing:antialiased;padding-bottom:78px}
+  color:var(--navy);line-height:1.4;-webkit-font-smoothing:antialiased;
+  padding-top:88px;padding-bottom:78px}
+section,.hero{scroll-margin-top:96px}
 .wrap{max-width:var(--wrap);margin:0 auto;padding:0 18px}
 h1,h2,h3{font-weight:800;letter-spacing:-.04em;line-height:.98;color:var(--navy)}
 h1{font-size:clamp(34px,5.2vw,64px)}
@@ -58,13 +60,22 @@ strong{font-weight:800;color:var(--navy)}
 .btn-teal{background:var(--teal);color:var(--navy)}
 .btn-teal:hover{background:var(--teal-soft)}
 
-/* header */
-header{padding:20px 0;position:sticky;top:0;z-index:60;background:var(--field)}
-header .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px}
-header img{height:28px;display:block}
-.hdr-cta{color:var(--navy);text-decoration:none;font-weight:800;font-size:14.5px;
-  background:#fff;padding:11px 22px;border-radius:999px;white-space:nowrap}
-.hdr-cta:hover{background:var(--teal-soft)}
+/* header - плаваюча біла пігулка, як на everident.com */
+header{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:60;
+  width:94%;max-width:var(--wrap);padding:0;
+  background:rgba(255,255,255,.78);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.6);border-radius:999px;
+  box-shadow:0 10px 30px -12px rgba(3,16,91,.2)}
+header .wrap{max-width:none;display:flex;align-items:center;justify-content:space-between;
+  gap:10px;height:64px;padding:0 10px 0 18px}
+header img{height:30px;display:block}
+.hdr-nav{display:flex;align-items:center;gap:26px;font-size:15px;font-weight:600}
+.hdr-nav a{color:var(--muted);text-decoration:none;white-space:nowrap;transition:color .14s}
+.hdr-nav a:hover{color:var(--navy)}
+.hdr-right{display:flex;align-items:center;gap:14px;flex:0 0 auto}
+.hdr-cta{color:#fff;text-decoration:none;font-weight:800;font-size:14.5px;
+  background:var(--navy);padding:13px 24px;border-radius:999px;white-space:nowrap;transition:.14s}
+.hdr-cta:hover{background:var(--navy-ink)}
 
 /* перемикач мови: прапорці як на рекрутинговій сторінці */
 .langsw{display:flex;align-items:center;gap:8px}
@@ -239,7 +250,11 @@ section{padding:52px 0}
   .tile-hero{min-height:auto}
   .tile-hero.withfig{grid-template-columns:1fr;padding-bottom:clamp(26px,3.2vw,44px)}
   .figwrap{display:none}
-  header{position:static}.hdr-cta{display:none}
+  .hdr-nav{display:none}
+  .hdr-cta{display:none}
+  header .wrap{height:56px;padding:0 14px}
+  header img{height:26px}
+  body{padding-top:78px}
   .sticky .btn{width:100%}
   .sticky .wrap{padding:0}
   .sticky-note{display:none}
@@ -308,11 +323,19 @@ section{padding:52px 0}
 <header>
   <div class="wrap">
     <img src="../img/everident-logo.svg" alt="Everident">
+    <nav class="hdr-nav">
+      <a href="#roles">Модель</a>
+      <a href="#benefits">Что получаешь</a>
+      <a href="#process">Как это работает</a>
+      <a href="#faq">Вопросы</a>
+    </nav>
+    <div class="hdr-right">
     <div class="langsw" role="group" aria-label="Язык">
       <a href="../" title="Украинский" aria-label="Украинский"><svg viewBox="0 0 9 6" aria-hidden="true"><rect width="9" height="3" fill="#0057b7"/><rect y="3" width="9" height="3" fill="#ffd700"/></svg></a>
       <a href="./" class="on" title="Белорусский / русский" aria-label="Белорусский / русский"><svg viewBox="0 0 9 6" aria-hidden="true"><rect width="9" height="6" fill="#fff"/><rect y="2" width="9" height="2" fill="#d22730"/></svg></a>
     </div>
     <a class="hdr-cta" href="#form">Оставить заявку</a>
+    </div>
   </div>
 </header>
 
@@ -674,11 +697,7 @@ section{padding:52px 0}
     return document.documentElement.lang==='ru' ? 'Partner RU' : 'Partner UA';
   }
   function sourceLabel(){
-    if(!SRC.utm_source){
-      if(document.referrer&&document.referrer.indexOf(location.hostname)===-1){
-        try{return pageLabel()+' · '+new URL(document.referrer).hostname;}
-        catch(e){return pageLabel();}}
-      return pageLabel();}
+    if(!SRC.utm_source) return pageLabel();
     var s=SRC.utm_source+(SRC.utm_medium?' / '+SRC.utm_medium:'');
     if(SRC.utm_campaign)s+=' · '+SRC.utm_campaign;
     if(SRC.utm_content)s+=' · '+SRC.utm_content;
