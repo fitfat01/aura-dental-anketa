@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Анкета партнёра - Everident</title>
-<meta name="description" content="Пять коротких вопросов. Открываем стоматологические клиники в Польше вместе с врачами.">
+<meta name="description" content="Шесть коротких вопросов. Открываем стоматологические клиники в Польше вместе с врачами.">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -128,12 +128,22 @@ src="https://www.facebook.com/tr?id=2244023079681248&ev=PageView&noscript=1"
   <div id="head">
     <span class="eyebrow">Everident</span>
     <h1>Анкета партнёра</h1>
-    <p class="sub">Пять коротких вопросов. По одному за раз - займёт минуту.</p>
+    <p class="sub">Шесть коротких вопросов. По одному за раз - займёт минуту.</p>
   </div>
 
   <form id="lead" novalidate>
     <div class="qbar"><div class="qbar-fill" id="qfill"></div></div>
-    <div class="qcount"><span id="qnow">1</span> / <span id="qtotal">5</span></div>
+    <div class="qcount"><span id="qnow">1</span> / <span id="qtotal">6</span></div>
+
+    <div class="qstep" data-v="goal">
+      <div class="qq">Что тебе ближе?</div>
+      <div class="radios">
+        <label><input type="radio" name="goal" value="Хочу відкрити свою клініку"><span>Хочу открыть свою клинику</span></label>
+        <label><input type="radio" name="goal" value="Хочу перейти з найму у власне крісло"><span>Хочу перейти из найма в своё кресло</span></label>
+        <label><input type="radio" name="goal" value="Поки просто дивлюсь, цікаво"><span>Пока просто смотрю, интересно</span></label>
+      </div>
+      <div class="err" id="e_goal">Выберите вариант</div>
+    </div>
 
     <div class="qstep" data-v="pwz">
       <div class="qq">Какой у тебя статус PWZ?</div>
@@ -216,7 +226,8 @@ src="https://www.facebook.com/tr?id=2244023079681248&ev=PageView&noscript=1"
 
   var ACTION='https://docs.google.com/forms/d/e/1FAIpQLSesikXkIv3Kl4gfD_BkgpYMx5gLlZcwsjRFdM9oKVbaGPK5kA/formResponse';
   var E={name:'entry.1320096200',phone:'entry.1132582372',city:'entry.1747793796',
-         pwz:'entry.1873910576',q:'entry.984965845',src:'entry.1781395167',lang:'entry.2045558235'};
+         pwz:'entry.1873910576',q:'entry.984965845',src:'entry.1781395167',lang:'entry.2045558235',
+         goal:'entry.283112391',kind:'entry.1898797617',step:'entry.1651937491'};
   var form=document.getElementById('lead');
   var SENDING='Отправляем…';
   function show(id,on){document.getElementById(id).style.display=on?'block':'none';}
@@ -230,6 +241,7 @@ src="https://www.facebook.com/tr?id=2244023079681248&ev=PageView&noscript=1"
 
   function okStep(i){
     var v=STEPS[i].getAttribute('data-v');
+    if(v==='goal')  return !!document.querySelector('input[name=goal]:checked');
     if(v==='pwz')   return !!document.querySelector('input[name=pwz]:checked');
     if(v==='city')  return !!val('f_city');
     if(v==='name')  return !!val('f_name');
@@ -237,7 +249,7 @@ src="https://www.facebook.com/tr?id=2244023079681248&ev=PageView&noscript=1"
     return true;
   }
   function errOf(i){
-    return {pwz:'e_pwz',city:'e_city',name:'e_name',phone:'e_phone'}[STEPS[i].getAttribute('data-v')];
+    return {goal:'e_goal',pwz:'e_pwz',city:'e_city',name:'e_name',phone:'e_phone'}[STEPS[i].getAttribute('data-v')];
   }
   function paint(){
     STEPS.forEach(function(s,i){s.classList.toggle('on',i===cur);});
@@ -249,6 +261,7 @@ src="https://www.facebook.com/tr?id=2244023079681248&ev=PageView&noscript=1"
     sendBtn.style.display=last?'':'none';
     var inp=STEPS[cur].querySelector('input[type=text],input[type=tel],textarea');
     if(inp) setTimeout(function(){try{inp.focus({preventScroll:true});}catch(e){inp.focus();}},60);
+    trackStep(cur);
   }
   function go(d){
     if(d>0){
@@ -264,9 +277,65 @@ src="https://www.facebook.com/tr?id=2244023079681248&ev=PageView&noscript=1"
   form.addEventListener('keydown',function(e){
     if(e.key==='Enter'&&e.target.tagName!=='TEXTAREA'){e.preventDefault();go(1);}
   });
-  [].slice.call(form.querySelectorAll('input[name=pwz]')).forEach(function(r){
-    r.addEventListener('change',function(){show('e_pwz',false);setTimeout(function(){go(1);},200);});
+  ['goal','pwz'].forEach(function(nm){
+    [].slice.call(form.querySelectorAll('input[name='+nm+']')).forEach(function(r){
+      r.addEventListener('change',function(){show('e_'+nm,false);setTimeout(function(){go(1);},200);});
+    });
   });
+  /* --- трекінг кроків і часткова заявка --- */
+  var SENT=false, PARTIAL_SENT=false, maxStep=0, seen={}, PKEY='ev_partial_sent';
+  function stepName(i){return STEPS[i].getAttribute('data-v');}
+  function langCode(){return document.documentElement.lang==='ru'?'ru':'ua';}
+  function stepLabel(i){return (i+1)+'/'+STEPS.length+' - '+stepName(i);}
+
+  /* подія на кожен крок, який людина побачила вперше */
+  function trackStep(i){
+    if(i>maxStep) maxStep=i;
+    if(seen[i]) return;
+    seen[i]=1;
+    if(window.fbq) fbq('trackCustom','AnketaStep',
+      {step:i+1,total:STEPS.length,step_name:stepName(i),language:langCode()});
+  }
+
+  function answers(){
+    var g=document.querySelector('input[name=goal]:checked'),
+        p=document.querySelector('input[name=pwz]:checked');
+    return {goal:g?g.value:'',pwz:p?p.value:'',city:val('f_city'),
+            name:val('f_name'),phone:val('f_phone'),q:val('f_q')};
+  }
+  function anything(d){return !!(d.goal||d.pwz||d.city||d.name||d.phone);}
+
+  function buildFD(d,kind,step){
+    var fd=new FormData();
+    fd.append(E.goal,d.goal);fd.append(E.pwz,d.pwz);fd.append(E.city,d.city);
+    fd.append(E.name,d.name);fd.append(E.phone,d.phone);fd.append(E.q,d.q);
+    fd.append(E.src,sourceLabel());fd.append(E.lang,langCode());
+    fd.append(E.kind,kind);fd.append(E.step,step);
+    return fd;
+  }
+
+  function sendPartial(){
+    if(SENT||PARTIAL_SENT) return;
+    var d=answers();
+    if(!anything(d)) return;
+    try{
+      if(sessionStorage.getItem(PKEY)==='1'){PARTIAL_SENT=true;return;}
+      sessionStorage.setItem(PKEY,'1');
+    }catch(e){}
+    PARTIAL_SENT=true;
+    var fd=buildFD(d,'Часткова',stepLabel(maxStep));
+    var ok=false;
+    try{ok=!!(navigator.sendBeacon&&navigator.sendBeacon(ACTION,fd));}catch(e){}
+    if(!ok){try{fetch(ACTION,{method:'POST',mode:'no-cors',body:fd,keepalive:true});}catch(e){}}
+    if(window.fbq) fbq('trackCustom','AnketaPartial',
+      {step:maxStep+1,step_name:stepName(maxStep),has_phone:d.phone?1:0,language:langCode()});
+  }
+
+  document.addEventListener('visibilitychange',function(){
+    if(document.visibilityState==='hidden') sendPartial();
+  });
+  window.addEventListener('pagehide',sendPartial);
+
   paint();
 
   form.addEventListener('submit',function(ev){
@@ -274,12 +343,8 @@ src="https://www.facebook.com/tr?id=2244023079681248&ev=PageView&noscript=1"
     for(var i=0;i<STEPS.length;i++){
       if(!okStep(i)){ cur=i; paint(); var e=errOf(i); if(e) show(e,true); return; }
     }
-    var pwz=document.querySelector('input[name=pwz]:checked');
-    var fd=new FormData();
-    fd.append(E.name,val('f_name'));fd.append(E.phone,val('f_phone'));
-    fd.append(E.city,val('f_city'));fd.append(E.pwz,pwz.value);
-    fd.append(E.q,val('f_q'));fd.append(E.src,sourceLabel());
-    fd.append(E.lang,document.documentElement.lang==='ru'?'ru':'ua');
+    SENT=true;
+    var fd=buildFD(answers(),'Повна',stepLabel(STEPS.length-1));
 
     sendBtn.disabled=true;sendBtn.textContent=SENDING;
     fetch(ACTION,{method:'POST',mode:'no-cors',body:fd}).catch(function(){}).then(function(){
