@@ -296,6 +296,27 @@ src="https://www.facebook.com/tr?id=2244023079681248&ev=PageView&noscript=1"
     working:'entry.1190108215', where:'entry.541356671', format:'entry.1471097491',
     dates:'entry.708726327', when:'entry.1897313351' };
   const SPEC = 'entry.1249115322';
+  const SRC = 'entry.234742984', CAMP = 'entry.437013265';
+  // --- Розмітка джерел: utm з реклами -> localStorage -> поля «Джерело» / «Кампанія» ---
+  (function(){
+    try{
+      var q=new URLSearchParams(location.search), o={};
+      var src=q.get('utm_source')||(q.get('fbclid')?'facebook':q.get('gclid')?'google':'');
+      if(src){ o.source=src; o.medium=q.get('utm_medium')||'paid';
+        o.campaign=q.get('utm_campaign')||''; o.content=q.get('utm_content')||'';
+        localStorage.setItem('ev_utm', JSON.stringify(o)); }
+    }catch(e){}
+  })();
+  function utmFields(){
+    var o=null; try{ o=JSON.parse(localStorage.getItem('ev_utm')||'null'); }catch(e){}
+    if(o&&o.source){
+      var camp=[o.campaign,o.content].filter(Boolean).join(' · ');
+      return { src:'everident.com · '+o.source+' / '+o.medium, camp: camp||(o.source==='facebook'?'Meta (без utm)':'-') };
+    }
+    var ref=''; try{ ref=document.referrer?new URL(document.referrer).hostname:''; }catch(e){}
+    if(ref&&ref.indexOf('everident.com')<0) return { src:'everident.com · '+ref, camp:'-' };
+    return { src:'everident.com · direct', camp:'-' };
+  }
 
   // --- Телефон: intl-tel-input (країна + валідація libphonenumber) ---
   const phoneInput = document.getElementById('phone');
@@ -434,6 +455,7 @@ src="https://www.facebook.com/tr?id=2244023079681248&ev=PageView&noscript=1"
     b.append(MAP.format, r('format'));
     b.append(MAP.dates, r('dates'));
     if (v('when')) b.append(MAP.when, v('when'));
+    try{ var u=utmFields(); b.append(SRC, u.src); b.append(CAMP, u.camp); }catch(e){}
     fetch(GFORM, { method:'POST', mode:'no-cors', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body: b.toString() })
       .catch(()=>{})
       .finally(() => {
